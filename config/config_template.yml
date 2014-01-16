@@ -1,15 +1,15 @@
 # rename to 'config.yml' to make active
 
 # basic variables
-rackspace_user:'user'
-rackspace_key:'findthisinyouraccountsettings'
-rackspace_flavor:'/512MB/'
-rackspace_region:'ord'
-rackspace_server_name:''
+rackspace_user: user
+rackspace_key: findthisinyouraccountsettings
+rackspace_flavor: 512MB Standard Instance
+rackspace_region: ord
+rackspace_server_name: jim
 
 # use internal servicenet? bool
-rackspace_allow_servicenet:false
+rackspace_allow_servicenet: false
 
 ## ssh key locations
-ssh_private_key_location:'custom_rsa'
-ssh_public_key_location:'custom_rsa.pub'
+ssh_private_key_location: custom_rsa
+ssh_public_key_location: custom_rsa.pub

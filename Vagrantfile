@@ -12,17 +12,21 @@ Vagrant.configure("2") do |config|
   config.vm.box = $box
   config.vm.box_url = $box_url
 
-  config.ssh.private_key_path = $cfg[:ssh_private_key_location]
+  config.ssh.private_key_path = $cfg['ssh_private_key_location']
+
+  # weird define hack to name the machine
+  config.vm.define $cfg['rackspace_server_name'] do |defined|
+  end
   
   config.vm.provider :rackspace do |rs|
-    rs.username = $cfg[:rackspace_user]
-    rs.api_key = $cfg[:rackspace_key]
-    rs.rackspace_region = $cfg[:rackspace_region]
-    rs.flavor = $cfg[:rackspace_flavor]
+    rs.username = $cfg['rackspace_user']
+    rs.api_key = $cfg['rackspace_key']
+    rs.rackspace_region = $cfg['rackspace_region']
+    rs.flavor = $cfg['rackspace_flavor']
     rs.image = /Ubuntu 12.04/
-    rs.public_key_path = $cfg[:ssh_public_key_location]
-    rs.server_name = $cfg[:rackspace_server_name]
-    if $cfg[:rackspace_allow_servicenet]
+    rs.public_key_path = $cfg['ssh_public_key_location']
+    rs.server_name = $cfg['rackspace_server_name']
+    if $cfg['rackspace_allow_servicenet']
       rs.network :service_net, :attached => false
     end
   end
@@ -54,7 +58,6 @@ Vagrant.configure("2") do |config|
     mv ./platform-production/.htaccess /vagrant/.htaccess
     mv ./platform-production/interfaces /vagrant/interfaces
     mv ./platform-production/framework /vagrant/framework
-    mv ./platform-production/.vagrant_settings /vagrant/.vagrant_settings
     rm -rf ./platform-production
     #
     # CASH MUSIC CHECK/INSTALL
