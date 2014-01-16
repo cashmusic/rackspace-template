@@ -18,7 +18,7 @@ vagrant up --provider=rackspace
   
 
 ## Links 
-[Rackspace Vagrant announcement/instructions](http://developer.rackspace.com/blog/vagrant-now-supports-rackspace-open-cloud.html)
-[Documentation for the Rackspace Vagrant plugin](https://sourcegraph.com/github.com/mitchellh/vagrant-rackspace)
-[Rackspace Performance benchmarks / server flavor names](http://developer.rackspace.com/blog/welcome-to-performance-cloud-servers-have-some-benchmarks.html)
-[Rad SSH keygen guide from Github](https://help.github.com/articles/generating-ssh-keys)
+[Rackspace Vagrant announcement/instructions](http://developer.rackspace.com/blog/vagrant-now-supports-rackspace-open-cloud.html)  
+[Documentation for the Rackspace Vagrant plugin](https://sourcegraph.com/github.com/mitchellh/vagrant-rackspace)  
+[Rackspace Performance benchmarks / server flavor names](http://developer.rackspace.com/blog/welcome-to-performance-cloud-servers-have-some-benchmarks.html)  
+[Rad SSH keygen guide from Github](https://help.github.com/articles/generating-ssh-keys)  
