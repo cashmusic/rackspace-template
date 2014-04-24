@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Log retention in days
+log_retention_days=<%= @log_retention_days %>
+
+if [ -z "$log_retention_days" ] || [ $log_retention_days -lt 2 ]; then
+  log_retention_days=7
+fi
+
+find /var/log/httpd* -name "*.log.gz" -mtime +$log_retention_days -exec rm "{}" ";"

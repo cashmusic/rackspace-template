@@ -1,3 +1,4 @@
-.vagrant/*
-config/config.yml
-config/ssh/*
+modules
+.vagrant
+Vagrantfile.local
+*.swp
