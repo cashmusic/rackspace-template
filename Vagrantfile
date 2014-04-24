@@ -1,66 +1,69 @@
-#
-# CASH Music basic box @ Rackspace
-#
-require 'yaml'
-$cfg = YAML::load_file('./config/config.yml')
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-$box = 'dummy'
-$box_url = 'https://github.com/mitchellh/vagrant-rackspace/raw/master/dummy.box'
+# You can override or add to this file by configuring the Vagrantfile.local
+# Note the provided Vagrantfile.local.example
 
+dirname = File.dirname(__FILE__)
+localfile = dirname + "/Vagrantfile.local"
+if File.exist?(localfile)
+  load localfile
+end
 
-Vagrant.configure("2") do |config|
-  config.vm.box = $box
-  config.vm.box_url = $box_url
+Vagrant.configure('2') do |config|
 
-  config.ssh.private_key_path = $cfg['ssh_private_key_location']
+  # For Rackspace, we use a dummy box since we pull in a Rackspace image.
+  # For local work in Virtualbox, we should use a CentOS 6.5 box (puppetlabs provided box is fine).
+  config.vm.box     = 'dummy'
+  config.vm.box_url = 'https://github.com/mitchellh/vagrant-rackspace/raw/master/dummy.box'
 
-  # weird define hack to name the machine
-  config.vm.define $cfg['rackspace_server_name'] do |defined|
-  end
-  
+  # Private ssh key path (should be set in Vagrantfile.local)
+  config.ssh.private_key_path = $ssh_private_key_path
+
+  # Work around default CentOS sudo settings.
+  config.ssh.pty = true
+
   config.vm.provider :rackspace do |rs|
-    rs.username = $cfg['rackspace_user']
-    rs.api_key = $cfg['rackspace_key']
-    rs.rackspace_region = $cfg['rackspace_region']
-    rs.flavor = $cfg['rackspace_flavor']
-    rs.image = /Ubuntu 12.04/
-    rs.public_key_path = $cfg['ssh_public_key_location']
-    rs.server_name = $cfg['rackspace_server_name']
-    if $cfg['rackspace_allow_servicenet']
-      rs.network :service_net, :attached => false
-    end
+    # These are all set in Vagrantfile.local
+    rs.username = $rackspace_user
+    rs.api_key = $rackspace_api_key
+    rs.rackspace_region = $rackspace_region
+    rs.flavor = $rackspace_flavor
+    rs.image = $rackspace_image
+    rs.key_name = $rackspace_key_name
+    rs.server_name = $rackspace_server_name
   end
 
-  config.vm.synced_folder '.', '/vagrant', 
-    owner: 'vagrant', 
-    group: 'www-data',
-    mount_options: ["dmode=777,fmode=777"]
+  # Configure the domain
+  if !defined? $domainname
+    $domainname = "cashmusic.org"
+  end
 
-  config.vm.provision "shell", inline: <<-shell
-    #!/bin/bash
-    sudo apt-get update
-    sudo apt-get -y install make curl apache2 php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-sqlite php5-curl php5-suhosin unzip
-    #
-    # CHANGE APACHE SETTINGS AND APACHE ENVIRONMENT VARIABLES
-    sudo cp -f /vagrant/.vagrant_settings/apache/default /etc/apache2/sites-available/default
-    sudo cp -f /vagrant/.vagrant_settings/apache/envvars /etc/apache2/envvars
-    #
-    # ENABLE MOD REWRITE
-    sudo a2enmod rewrite 
-    #
-    # RESTART APACHE
-    sudo /etc/init.d/apache2 restart
-    #
-    * GET CASH PLATFORM STUFF
-    wget https://codeload.github.com/cashmusic/platform/zip/production
-    unzip production
-    rm production
-    mv ./platform-production/.htaccess /vagrant/.htaccess
-    mv ./platform-production/interfaces /vagrant/interfaces
-    mv ./platform-production/framework /vagrant/framework
-    rm -rf ./platform-production
-    #
-    # CASH MUSIC CHECK/INSTALL
-    php /vagrant/.vagrant_settings/vagrant_cashmusic_installer.php
-  shell
+  # Configure the hostname
+  if !defined? $hostname
+    $hostname = "vagrant-test"
+  end
+  $fqdn = "#{$hostname}.#{$domainname}"
+  config.vm.hostname = $fqdn
+
+
+  # Install r10k using the shell provisioner and download the Puppet modules
+  config.vm.provision :shell, :path => 'bootstrap.sh'
+
+  # Puppet provisioner for primary configuration
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "manifests"
+    puppet.module_path = [ "modules", "site", "dist" ]
+    puppet.manifest_file  = "site.pp"
+    puppet.hiera_config_path = "hiera/hiera.yaml"
+    puppet.working_directory = "/vagrant"
+    puppet.options = "--verbose"
+
+    # In vagrant environment it can be hard for facter to get this stuff right
+    puppet.facter = {
+      "fqdn" => $fqdn,
+      "hostname" => $fqdn,
+    }
+
+  end
 end
