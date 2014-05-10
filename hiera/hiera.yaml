@@ -16,7 +16,12 @@
 # Hierarchy for our configuration.
 # Most specific definitions come first, ending with global defaults.
 # This is a very simple hierarchy with only hostnames, virtual types, and common.
+# dev_override is a safety net to disable things that shouldn't run in any test environment.
 :hierarchy:
+  - dev_override
   - hosts/%{fqdn}
+  - hostenv/%{hostenv}/%{hosttype}
+  - hostenv/%{hostenv}/common
+  - types/%{hosttype}
   - virtual/%{virtual}
   - common
