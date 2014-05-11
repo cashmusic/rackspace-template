@@ -15,7 +15,12 @@ hiera_include('classes')
 filebucket { main: server => puppet }
 
 ## Global Defaults
-File { backup => main }
+File {
+  owner => 'root',
+  group => 'root',
+  mode => 0644,
+  backup => main
+}
 Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
 # Default firewall rules to tcp protocol, and accept so they
 # don't need to be defined with each rule.
