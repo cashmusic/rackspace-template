@@ -93,6 +93,7 @@ yum_cron::days_of_week: '0'
 php::mod_php5:php_package_name: 'php53u'
 php::common::common_package_name: 'php53u-common'
 php::cli:cli_package_name: 'php53u-cli'
+php::fpm::daemon::fpm_package_name: 'php53u-fpm'
 
 # We use array merge to pull in a list of PHP modules to install.
 # These are common modules for all web hosts; the list can be appended
@@ -132,6 +133,13 @@ site_profile::web::php_apc_ini:
   apc.shm_size: '64M'
   apc.rfc1867: '1'
   apc.num_files_hint: '1200'
+
+site_profile::web::php_fpm_conf:
+  www:
+    listen: '127.0.0.1:9000'
+    user: 'apache'
+    group: 'apache'
+    pkgname: 'php53u-fpm'
 
 #############################################
 # MySQL Settings.

@@ -27,7 +27,11 @@ class site_profile::web {
   # PHP
   create_resources('php::ini', hiera_hash('site_profile::web::php_ini', {}))
   class { 'php::cli': }
-  class { 'php::mod_php5': }
+
+  # Install php-fpm and add FPM configuration.
+  class { 'php::fpm::daemon': }
+  # php-fpm ships with a default 'www' config, so we default to that.
+  create_resources('php::fpm::conf', hiera_hash('site_profile::web::php_fpm_conf', {}))
 
   # Install PHP modules (extensions).
   $php_packages = hiera_array('site_profile::web::php_packages', [])
