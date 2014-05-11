@@ -1,0 +1,8 @@
+# Configuration for "multi" host type
+#
+# ---
+# #############################################
+Class definitions.
+classes:
+  - site_profile::db
+  - site_profile::web

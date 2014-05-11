@@ -3,10 +3,10 @@
 ---
 #############################################
 # Class definitions.
+# These are classes that are assigned to all nodes.
+# More specific classes are listed in types/{nodetype}.yml
 classes:
  - site_profile::base
- - site_profile::db
- - site_profile::web
 
 #############################################
 # Global enable/disable flags.
