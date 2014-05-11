@@ -1,0 +1,11 @@
+# Configuration for stage DB servers.
+
+##############################################
+## Firewall Rules.
+site_profile::db::firewall_rules:
+  '100 allow mysqld from stage-web1':
+      port: [3306]
+      source: stage-web1
+  '100 allow mysqld from stage-web2':
+      port: [3306]
+      source: stage-web2

@@ -2,6 +2,10 @@
 
 class site_profile::base {
 
+  # Firewall configuration common for all hosts.
+  $firewall_rules = hiera_hash('site_profile::base::firewall_rules', {})
+  create_resources('firewall', $firewall_rules)
+
   # Packages to be added to all machines for convenience or necessity.
   $base_packages = hiera_array('site_profile::base::base_packages', [])
   if ($base_packages != []) {

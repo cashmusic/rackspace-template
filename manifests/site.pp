@@ -15,9 +15,12 @@ import "nodes/*.pp"
 
 filebucket { main: server => puppet }
 
-# global defaults
+## Global Defaults
 File { backup => main }
 Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
+# Default firewall rules to tcp protocol, and accept so they
+# don't need to be defined with each rule.
+Firewall { proto => tcp, action => accept }
 
 node default {
   stage { 'pre': before => Stage['main'] }

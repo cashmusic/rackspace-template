@@ -1,5 +1,9 @@
 class site_profile::web {
 
+  # Firewall configuration for web hosts.
+  $firewall_rules = hiera_hash('site_profile::web::firewall_rules', {})
+  create_resources('firewall', $firewall_rules)
+
   # Setup Apache base class, includes default vhost.
   class  { 'apache': }
 

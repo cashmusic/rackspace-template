@@ -12,6 +12,12 @@ classes:
 # Global enable/disable flags.
 enable_yum_cron: TRUE
 
+##################################################
+## Firewall Rules.
+site_profile::base::firewall_rules:
+  '010 allow ssh access':
+    port: [22]
+
 
 #############################################
 ## User configuration
@@ -25,6 +31,7 @@ enable_yum_cron: TRUE
 # User accounts, start at 3200
 # Accounts limited to certain systems/environments are defined elsewhere in the hierarchy
 # and should use 3500+ so that they don't overlap with these common accounts.
+# Space account UIDs by 5 so that they don't step on accounts created outside of puppet.
 user_accounts:
   jeff:
     uid: 3200

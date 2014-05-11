@@ -21,18 +21,4 @@ class site_firewall::pre {
     action  => 'accept',
   }
 
-  # Following may need to be transplanted to nearer their homes, but here for now.
-  firewall { '003 allow ssh access':
-    port   => [22],
-    proto  => tcp,
-    action => accept,
-  }
-
-  # Allow web ports.
-  firewall { '100 allow http and https access':
-    port   => [80, 443],
-    proto  => tcp,
-    action => accept,
-  }
-
 }

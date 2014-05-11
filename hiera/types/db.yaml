@@ -1,7 +1,6 @@
 # Configuration for "db" host type
-#
-# ---
-# #############################################
-Class definitions.
+
+##############################################
+## Class definitions.
 classes:
   - site_profile::db

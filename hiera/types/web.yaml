@@ -1,7 +1,12 @@
 # Configuration for "web" host type
-#
-# ---
-# #############################################
-Class definitions.
+
+##############################################
+## Class definitions.
 classes:
   - site_profile::web
+
+##################################################
+## Firewall Rules.
+site_profile::web::firewall_rules:
+  '100 allow http and https access':
+    port: [80, 443]
