@@ -11,7 +11,6 @@ $hostenv = regsubst($fqdn, '^([a-z]+)-([a-z]+)(\d)\.(.*)$', '\1')
 $hosttype = regsubst($fqdn, '^([a-z]+)-([a-z]+)(\d)\.(.*)$', '\2')
 
 hiera_include('classes')
-import "nodes/*.pp"
 
 filebucket { main: server => puppet }
 
