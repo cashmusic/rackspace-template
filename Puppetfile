@@ -2,16 +2,15 @@
 forge 'forge.puppetlabs.com'
 
 # Install modules from the Forge
-mod 'fsalum/newrelic', '3.0.3'
 mod 'jeffsheltren/yumrepos', '0.3.3'
 mod 'puppetlabs/apache', '1.0.1'
 mod 'puppetlabs/concat', '1.0.0'
-mod 'puppetlabs/firewall', '1.0.0'
+mod 'puppetlabs/firewall', '1.0.2'
 mod 'puppetlabs/mysql', '2.2.3'
 mod 'puppetlabs/stdlib', '4.1.0'
 mod 'puppetlabs/vcsrepo', '0.1.1'
 mod 'saz/sudo', '3.0.2'
-mod 'saz/ssh', '2.3.3'
+mod 'saz/ssh', '2.3.4'
 mod 'treydock/yum_cron', '1.0.0'
 mod 'torrancew/account', '0.0.5'
 
@@ -26,9 +25,4 @@ mod 'php',
 # This fork adds RHEL support.
 mod 'denyhosts',
   :git => 'git://github.com/nnewton/puppetlabs-denyhosts.git',
-  :ref => 'master'
-
-# Memcached fork should be OK after 2 PRs get in.
-mod 'memcached',
-  :git => 'git://github.com/rfay/puppet-memcached.git',
   :ref => 'master'
