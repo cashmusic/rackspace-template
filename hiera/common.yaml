@@ -68,9 +68,16 @@ site_profile::base::base_packages:
   - yum-plugin-replace
 
 #############################################
+## sshd Configuration.
+ssh::server::storeconfigs_enabled: false
+ssh::server::options:
+  ClientAliveInterval: '120'
+
+
+#############################################
 ## Denyhosts Configuration.
 # Global allowed hosts
-site_profile::base::allowhosts:
+denyhosts::allow
   - 127.0.0.1
 
 #############################################
@@ -142,7 +149,7 @@ site_profile::dbclient::mysql_client_packages:
 mysql::server::package_name: 'mysql55-server'
 
 # my.cnf default settings
-site_profile::db::mysql_options:
+mysql::server::override_options:
   mysqld:
     max_connections: '50'
     max_connect_errors: '50000'

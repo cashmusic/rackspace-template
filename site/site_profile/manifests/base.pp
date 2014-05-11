@@ -1,4 +1,4 @@
-# Stuff that should be added on every box.
+# site_profile::base is included on all machines for standard base configuration.
 
 class site_profile::base {
 
@@ -15,36 +15,23 @@ class site_profile::base {
   }
 
   # System groups.
-  $system_groups = hiera_hash('system_groups', {} )
-  if ($system_groups != {} ) {
-    create_resources('group', $system_groups)
-  }
+  create_resources('group', hiera_hash('system_groups', {} ))
 
   # User Accounts. Passwords should be stored in private hiera repo.
-  $user_accounts = hiera_hash('user_accounts', {} )
-  if ($user_accounts != {} ) {
-    create_resources('account', $user_accounts)
-  }
+  create_resources('account', hiera_hash('user_accounts', {} ))
 
   ## Sudo configuration
   class { 'sudo': }
   sudo::conf { 'admins':
     priority => 10,
-    content  => "%wheel ALL=(ALL) NOPASSWD: ALL",
+    content  => "%wheel ALL=(ALL) ALL",
   }
 
-  ## sshd configuration
-  class { 'ssh::server':
-    storeconfigs_enabled => false,
-    options => {
-      'ClientAliveInterval' => '120',
-    },
-  }
+  ## Enable/configure sshd -- settings stored in hiera.
+  class { 'ssh::server': }
 
-  # Denyhosts.
-  class { "denyhosts":
-    allow => hiera("site_profile::base::allowhosts"),
-  }
+  # Enable denyhosts. Default allow list is in hiera.
+  class { "denyhosts": }
 
   # Enable yum cron. Defaults to only check for updates, not update automatically.
   if (hiera('enable_yum_cron', FALSE)) {
