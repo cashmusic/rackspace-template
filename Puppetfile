@@ -19,7 +19,7 @@ mod 'torrancew/account', '0.0.5'
 # we can get our changes merged in upstream.
 mod 'php',
   :git => 'git://github.com/jeffsheltren/puppet-php.git',
-  :ref => '0.3.9.3-params'
+  :ref => 'testing'
 
 # puppetlabs denyhosts is mostly unmaintained at this point.
 # This fork adds RHEL support.

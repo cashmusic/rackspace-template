@@ -25,33 +25,21 @@ class site_profile::web {
   }
 
   # PHP
-  # Pull in variables from Hiera.
-  $php_package_basename = hiera('site_profile::web::php_package_basename', 'php53u')
-  $php_packages = hiera_array('site_profile::web::php_packages', [])
-  $php_pear_basename = hiera('site_profile::web::php_pear_basename', 'php-pear')
-  $php_pear_packages = hiera_array('site_profile::web::php_pear_packages', [])
-  $php_ini_path = hiera('site_profile::web::php_ini_path', '/etc/php.ini')
+  create_resources('php::ini', hiera_hash('site_profile::web::php_ini', {}))
+  class { 'php::cli': }
+  class { 'php::mod_php5': }
 
-  # Setup php.ini.
-  $php_ini = hiera_hash('site_profile::web::php_ini')
-  if ($php_ini != nil) {
-    create_resources('php::ini', $php_ini)
-  }
-
-  class { 'php::cli': cli_package_name => "${php_package_basename}-cli" }
-  class { 'php::mod_php5':
-          php_package_name => $php_package_basename,
-          manage_httpd_php_conf => 'false',
-        }
   # Install PHP modules (extensions).
-  php::module { $php_packages: package_prefix => $php_package_basename }
+  $php_packages = hiera_array('site_profile::web::php_packages', [])
+  $php_pear_packages = hiera_array('site_profile::web::php_pear_packages', [])
+  php::module { $php_packages: }
   # Install PHP Pear packages.
-  php::module { $php_pear_packages: package_prefix => $php_pear_basename }
+  php::module { $php_pear_packages: }
 
   # APC module configuration.
   php::module::ini { 'apc':
-                     pkgname => "${php_package_basename}-pecl-apc",
-                     settings => hiera_hash('site_profile::web::php_apc_ini'),
+                     pkgname => hiera('site_profile::web::php_apc_packagename', 'php53u-pecl-apc'),
+                     settings => hiera_hash('site_profile::web::php_apc_ini', {}),
                    }
 
   # Create apache vhosts.
