@@ -77,7 +77,7 @@ ssh::server::options:
 #############################################
 ## Denyhosts Configuration.
 # Global allowed hosts
-denyhosts::allow
+denyhosts::allow:
   - 127.0.0.1
 
 #############################################
