@@ -139,7 +139,7 @@ site_profile::web::php_fpm_conf:
     listen: '127.0.0.1:9000'
     user: 'apache'
     group: 'apache'
-    pkgname: 'php53u-fpm'
+    fpm_package_name: 'php53u-fpm'
 
 #############################################
 # MySQL Settings.
