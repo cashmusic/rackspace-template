@@ -14,12 +14,11 @@ mod 'saz/ssh', '2.3.4'
 mod 'treydock/yum_cron', '1.0.0'
 mod 'torrancew/account', '0.0.5'
 
-# This php module is forked from thias/php in the forge in order
-# to add parameters to the classes. We're using this fork until
-# we can get our changes merged in upstream.
+# Using a direct git reference instead of a module install
+# until these latest commits are rolled into a release.
 mod 'php',
-  :git => 'git://github.com/jeffsheltren/puppet-php.git',
-  :ref => 'testing'
+  :git => 'git://github.com/thias/puppet-php.git',
+  :ref => '594b551326a4572769eb5ce73ea63622e9c04903'
 
 # puppetlabs denyhosts is mostly unmaintained at this point.
 # This fork adds RHEL support.
