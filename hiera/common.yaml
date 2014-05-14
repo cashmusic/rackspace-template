@@ -84,7 +84,7 @@ denyhosts::allow:
 # Yum cron settings.
 yum_cron::check_only: 'yes'
 yum_cron::randomwait: '10'
-yum_cron::mailto: 'root@localhost'
+yum_cron::mailto: 'sysops@cashmusic.org'
 yum_cron::days_of_week: '0'
 
 #############################################
