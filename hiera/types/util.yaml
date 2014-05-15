@@ -3,5 +3,6 @@
 ##############################################
 ## Class definitions.
 classes:
-  - site_profile::puppetmaster
   - apache
+  - site_profile::jenkins
+  - site_profile::puppetmaster
