@@ -11,7 +11,7 @@ class site_profile::jenkins {
     mode => 0700,
     owner => 'jenkins',
     group => 'jenkins',
-    require => File['/var/lib/jenkins'],
+    require => Class['::jenkins'],
   }
 
   # SSH private key - real file is in private repo,
