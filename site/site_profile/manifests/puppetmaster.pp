@@ -15,8 +15,8 @@ class site_profile::puppetmaster (
   }
 
   puppet::masterenv{ 'production':
-    modulepath => hiera('puppet::master::modulepath', '/etc/puppetmaster/modules')
-    manifest => hiera('puppet::master::manifest', '/etc/puppetmaster/manifests/site.pp')
+    modulepath => hiera('puppet::master::modulepath', '/etc/puppetmaster/modules'),
+    manifest => hiera('puppet::master::manifest', '/etc/puppetmaster/manifests/site.pp'),
   }
 
   # Fileserver.conf is not installed/managed by puppet::master, so we hack it in.
