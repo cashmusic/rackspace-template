@@ -1,0 +1,7 @@
+# Configuration for "util" host type
+
+##############################################
+## Class definitions.
+classes:
+  - site_profile::puppetmaster
+  - apache

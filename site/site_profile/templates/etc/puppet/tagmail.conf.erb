@@ -1,0 +1,9 @@
+# Managed by puppet, change it there!
+
+# This file determines where puppet notifications get emailed to. It can
+# be fine-tuned with site_profile::puppetmaster::puppet_all_notification_entries,
+# etc in hiera
+
+all: <% @puppet_all_notification_entries.each do |entry| -%><%= entry %>,<% end -%>
+
+warning,err: <% @puppet_warning_notification_entries.each do |entry| -%><%= entry %>,<% end -%>
