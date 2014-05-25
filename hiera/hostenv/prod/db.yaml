@@ -9,3 +9,10 @@ site_profile::db::firewall_rules:
   '100 allow mysqld from prod-web2':
       port: [3306]
       source: prod-web2
+
+##############################################
+## MySQL Configuration (overrides values from common.yaml).
+mysql::server::override_options:
+  mysqld:
+    max_connections: '150'
+    innodb_buffer_pool_size: '2G'
