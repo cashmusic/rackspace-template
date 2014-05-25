@@ -12,7 +12,7 @@ site_profile::db::firewall_rules:
 
 ##############################################
 ## MySQL Configuration (overrides values from common.yaml).
-mysql::server::override_options:
+site_profile::db::mysql_options:
   mysqld:
     max_connections: '150'
     innodb_buffer_pool_size: '2G'

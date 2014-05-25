@@ -196,7 +196,7 @@ site_profile::dbclient::mysql_client_packages:
 mysql::server::package_name: 'mysql55-server'
 
 # my.cnf default settings
-mysql::server::override_options:
+site_profile::db::mysql_options:
   mysqld:
     max_connections: '50'
     max_connect_errors: '50000'
