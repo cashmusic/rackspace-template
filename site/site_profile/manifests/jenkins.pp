@@ -1,6 +1,6 @@
 class site_profile::jenkins {
 
-  $config_hash = hiera_hash('site_profile::jenkins::parameters', {})
+  $config_hash = hiera_hash('site_profile::jenkins::config_hash', {})
   $configure_firewall = hiera('site_profile::jenkins::configure_firewall', false)
   class { "::jenkins":
     configure_firewall => $configure_firewall,
