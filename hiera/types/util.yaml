@@ -18,4 +18,5 @@ site_profile::puppetmaster::firewall_rules:
 ## Jenkins configuration.
 site_profile::jenkins::configure_firewall: false
 site_profile::jenkins::config_hash:
-  LISTEN_ADDRESS: 127.0.0.1
+  LISTEN_ADDRESS:
+    value: 127.0.0.1
