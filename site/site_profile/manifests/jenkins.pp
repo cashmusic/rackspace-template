@@ -1,6 +1,7 @@
 class site_profile::jenkins {
 
-  class { "::jenkins": configure_firewall => false }
+  $jenkins_parameters = hiera_hash('site_profile::jenkins::parameters', {})
+  class { "::jenkins": $jenkins_parameters }
 
   $firewall_rules = hiera_hash('site_profile::jenkins::firewall_rules', {})
   create_resources('firewall', $firewall_rules)

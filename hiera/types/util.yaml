@@ -13,3 +13,10 @@ site_profile::puppetmaster::firewall_rules:
   '110 allow puppet agent from prod-db1':
     port: 8140
     source: 23.253.161.246
+
+##############################################
+## Jenkins configuration.
+site_profile::jenkins::parameters:
+  configure_firewall: false
+  config_hash:
+    LISTEN_ADDRESS: 127.0.0.1
