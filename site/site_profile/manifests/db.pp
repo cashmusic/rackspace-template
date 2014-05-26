@@ -28,4 +28,13 @@ class site_profile::db {
     }
   }
 
+  # Copy mysqlreport for automated cron runs.
+  # This script has been modified slightly to work with the puppet configured ~/.my.cnf (with single quotes).
+  file { "/usr/local/bin/mysqlreport":
+    owner => root,
+    group => root,
+    mode => 0755,
+    source => "puppet:///modules/site_profile/usr/local/bin/mysqlreport",
+  }
+
 }
