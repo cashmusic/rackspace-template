@@ -14,9 +14,11 @@ site_profile::puppetmaster::firewall_rules:
     port: 8140
     source: 23.253.161.246
 
+sym_profile::jenkins::firewall_rules:
+  '140 allow github hooks':
+    port: 8080
+    source: 192.30.252.0/22
+
 ##############################################
 ## Jenkins configuration.
 site_profile::jenkins::configure_firewall: false
-site_profile::jenkins::config_hash:
-  JENKINS_LISTEN_ADDRESS:
-    value: 127.0.0.1
