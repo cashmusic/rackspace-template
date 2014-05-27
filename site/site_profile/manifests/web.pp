@@ -4,8 +4,14 @@ class site_profile::web {
   $firewall_rules = hiera_hash('site_profile::web::firewall_rules', {})
   create_resources('firewall', $firewall_rules)
 
-  # Setup Apache base class, includes default vhost.
+  # Setup Apache base class.
   class  { 'apache': }
+
+  # Create directories for apache vhosts.
+  create_resources('file', hiera_hash('site_profile::web::vhost_dirs', {}), { ensure => directory })
+
+  # Create apache vhosts.
+  create_resources('apache::vhost', hiera_hash('site_profile::web::vhosts', {}))
 
   # The default log rotator for httpd is not required because we use cronolog.
   file { "/etc/logrotate.d/httpd":
