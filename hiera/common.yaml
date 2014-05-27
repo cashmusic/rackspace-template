@@ -196,6 +196,7 @@ mysql::server::package_name: 'mysql55-server'
 # my.cnf default settings
 site_profile::db::mysql_options:
   mysqld:
+    bind_address: 0.0.0.0
     max_connections: '50'
     max_connect_errors: '50000'
     long_query_time: '5'
