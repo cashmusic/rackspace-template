@@ -1,0 +1,5 @@
+127.0.0.1 localhost <%= @fqdn %> <% @equivalent_hosts.each do |host| -%><%= host %> <% end -%>
+
+<% @hosts.keys.each do |ip| -%>
+<%= ip %> <%= @ip['hostname'] %>.<%= @domain %> <%= @ip['hostname'] %>
+<% end -%>

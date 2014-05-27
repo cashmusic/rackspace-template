@@ -38,4 +38,10 @@ class site_profile::base {
     class { 'yum_cron': }
   }
 
+  # Hosts file
+  $hosts = hiera('site_profile::base::hosts')
+  file { "/etc/hosts":
+    content => template('site_profile/etc/hosts.erb'),
+  }
+
 }
