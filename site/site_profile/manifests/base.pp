@@ -40,6 +40,7 @@ class site_profile::base {
 
   # Hosts file
   $hosts = hiera_hash('site_profile::base::hosts', {})
+  $equivalent_hosts = hiera_hash('site_profile::base::equivalent_hosts', [])
   file { "/etc/hosts":
     content => template('site_profile/etc/hosts.erb'),
   }
