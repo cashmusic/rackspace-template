@@ -60,6 +60,16 @@ user_accounts:
     ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQC4jVm7FUEZE22lsdjAjqeqJzJNQf7TlPyMZrK7Nnwu0H6krzbaxvpqEu22raqxZvxqinWlXBeZzw1EWfdY6se5Lb8Ec0yYl32+BrQoqmhp2b4wLpjKbkF8r+wy0JQnifR7mBT+S/fZuVqj1mPXqwDekmjGROBAWUH0z4n1QaL4byBStBuBprv2nWwYD9rJhb8UqCyLQLcs8i1eHOMge7WKmnHwH0e7ltPvR+zEFt6iDJpD39KJTWI15T0Wao+tpiW+1U4xD1oxJZqCtsKcojwaROUqj+rxe25anIKWBmR3EEn8KU0W40BGbV70jGmrlilVt/NGYKsn1p/91i9haEDh
     require:
       - Group[local-git]
+  jessevondoom:
+    uid: 3205
+    ssh_key_type: ssh-rsa
+    groups:
+      - users
+      - wheel
+      - local-git
+    ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQC0TVZHrWWCPgYZ+/+vzgMMGx4Q2G5Sm5moFfEkYI0kBsJ3b1by45zVE1WdggEBCWNc8LhAblm1HLqfpwejMs+h66sCZQm41eQCe/tDDs7NUuGsV8MHRc1RU81TRgC6VXa3GnkJ+Jamr8yEfeKHBLMDmgplVFKtX7hLNccgR2iQffx9LJzrgLQNixvLQOLIHKOxFnpOjI0AP0pD618WzE9wlLXCy2wedq9I5zo10zB7oPcRf7Ra432kXmAgSM+u5ZVICcj55R0xYWyzQa8CSr2SchzMoE9/y10FFVR6XWtC5pCYcVcipRa3dXF5P/5KuyypyRswuju8jcE8LlLDOE1N
+    require:
+      - Group[local-git]
 
 system_groups:
   local-git:
