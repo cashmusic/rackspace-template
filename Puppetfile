@@ -22,7 +22,7 @@ mod 'torrancew/account', '0.0.5'
 # until these latest commits are rolled into a release.
 mod 'php',
   :git => 'git://github.com/thias/puppet-php.git',
-  :ref => '594b551326a4572769eb5ce73ea63622e9c04903'
+  :ref => 'f83e6f0e68fa7926fa1c5eb24353e020b8f87860'
 
 # puppetlabs denyhosts is mostly unmaintained at this point.
 # This fork adds RHEL support.
