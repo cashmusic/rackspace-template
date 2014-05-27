@@ -173,7 +173,7 @@ site_profile::web::vhost_dirs:
 
 # Common vhost definitions.
 site_profile::web::vhosts:
-  default:
+  platform_default:
     port: 80
     docroot: /var/www/cash_platform
     default_vhost: true
