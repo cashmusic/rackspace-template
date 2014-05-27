@@ -13,6 +13,9 @@ site_profile::puppetmaster::firewall_rules:
   '110 allow puppet agent from prod-db1':
     port: 8140
     source: 23.253.161.246
+  '110 allow puppet agent from prod-web5':
+    port: 8140
+    source: 23.253.55.164
 
 site_profile::jenkins::firewall_rules:
   '140 allow github hooks':
