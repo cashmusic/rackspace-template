@@ -49,6 +49,21 @@ class site_profile::web {
                      settings => hiera_hash('site_profile::web::php_apc_ini', {}),
                    }
 
+  # Setup fastcgi configuration to point to php-fpm.
+  class { 'yumrepos::repoforge': }
+
+  package { "mod_fastcgi":
+    ensure => present,
+    require => Class['yumrepos::repoforge'],
+  }
+
+  # TODO: this should be in a template, configurable with hiera values.
+  file { "/etc/httpd/conf.d/fastcgi.conf":
+    source => "puppet:///modules/site_profile/etc/httpd/conf.d/fastcgi.conf",
+    require => [ Package['mod_fastcgi'], Class['apache'] ],
+    notify => Service['httpd'],
+  }
+
   # Create apache vhosts.
   $vhosts = hiera('vhosts', {} )
   create_resources('apache::vhost', $vhosts)
