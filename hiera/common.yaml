@@ -167,10 +167,6 @@ site_profile::web::php_fpm_conf:
 # Don't use the module's default vhost, we'll create our own.
 apache::default_vhost: false
 
-site_profile::web::vhost_dirs:
-  default_vhost_path:
-    path: /var/www/cash_platform
-
 # Common vhost definitions.
 site_profile::web::vhosts:
   platform_default:

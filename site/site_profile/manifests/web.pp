@@ -7,9 +7,6 @@ class site_profile::web {
   # Setup Apache base class.
   class  { 'apache': }
 
-  # Create directories for apache vhosts.
-  create_resources('file', hiera_hash('site_profile::web::vhost_dirs', {}), { ensure => directory })
-
   # Create apache vhosts.
   create_resources('apache::vhost', hiera_hash('site_profile::web::vhosts', {}))
 
