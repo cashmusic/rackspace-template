@@ -113,27 +113,27 @@ yum_cron::days_of_week: '0'
 #############################################
 ## PHP Settings
 # We use IUS PHP 5.3 by default.
-php::mod_php5:php_package_name: 'php53u'
-php::common::common_package_name: 'php53u-common'
-php::cli:cli_package_name: 'php53u-cli'
-php::fpm::daemon::fpm_package_name: 'php53u-fpm'
+php::mod_php5:php_package_name: 'php54'
+php::common::common_package_name: 'php54-common'
+php::cli:cli_package_name: 'php54-cli'
+php::fpm::daemon::fpm_package_name: 'php54-fpm'
 
 # We use array merge to pull in a list of PHP modules to install.
 # These are common modules for all web hosts; the list can be appended
 # to for a particular host/role/env by adding additional items to other
 # hierarchy levels in Hiera.
 site_profile::web::php_packages:
-  - php53u-gd
-  - php53u-imap
-  - php53u-mbstring
-  - php53u-mcrypt
-  - php53u-mysql
-  - php53u-pdo
-  - php53u-pear
-  - php53u-pecl-apc
-  - php53u-soap
-  - php53u-xml
-  - php53u-xmlrpc
+  - php54-gd
+  - php54-imap
+  - php54-mbstring
+  - php54-mcrypt
+  - php54-mysql
+  - php54-pdo
+  - php54-pear
+  - php54-pecl-apc
+  - php54-soap
+  - php54-xml
+  - php54-xmlrpc
 
 # php.ini settings
 site_profile::web::php_ini:
@@ -162,7 +162,7 @@ site_profile::web::php_fpm_conf:
     listen: '127.0.0.1:9000'
     user: 'apache'
     group: 'apache'
-    fpm_package_name: 'php53u-fpm'
+    fpm_package_name: 'php54-fpm'
 
 #############################################
 # MySQL Settings.

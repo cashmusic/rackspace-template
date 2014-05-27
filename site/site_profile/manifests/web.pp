@@ -42,7 +42,7 @@ class site_profile::web {
 
   # APC module configuration.
   php::module::ini { 'apc':
-                     pkgname => hiera('site_profile::web::php_apc_packagename', 'php53u-pecl-apc'),
+                     pkgname => hiera('site_profile::web::php_apc_packagename', 'php54-pecl-apc'),
                      settings => hiera_hash('site_profile::web::php_apc_ini', {}),
                    }
 
