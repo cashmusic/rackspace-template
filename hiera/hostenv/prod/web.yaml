@@ -1,0 +1,7 @@
+# Configuration for prod web servers.
+
+##############################################
+# PHP Configuration (overrides values from common.yaml).
+site_profile::web::php_ini:
+  /etc/php.ini:
+    display_errors: 'Off'
