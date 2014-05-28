@@ -101,6 +101,7 @@ site_profile::base::base_packages:
   - strace
   - tcpdump
   - telnet
+  - vim-enhanced
   - yum-plugin-replace
 
 #############################################
