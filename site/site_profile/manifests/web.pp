@@ -72,4 +72,16 @@ class site_profile::web {
   # and that requires mod_proxy.
   class { 'apache::mod::proxy': }
 
+  package { 'mod_extract_forwarded':
+    ensure => present,
+    require => Class['apache::mod::proxy'],
+  }
+
+  # TODO: templatize this shit.
+  file { "/etc/httpd/conf.d/mod_extract_forwarded.conf":
+    source => "puppet:///modules/site_profile/etc/httpd/conf.d/mod_extract_forwarded.conf",
+    require => [ Package['mod_extract_forwarded'], Class['apache'] ],
+    notify => Service['httpd'],
+  }
+
 }
