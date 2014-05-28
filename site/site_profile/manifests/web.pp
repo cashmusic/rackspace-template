@@ -68,4 +68,8 @@ class site_profile::web {
   $vhosts = hiera('vhosts', {} )
   create_resources('apache::vhost', $vhosts)
 
+  # Web nodes are behind a load balancer, we need mod_extract_forwarded to get the client IP,
+  # and that requires mod_proxy.
+  class { 'apache::mod::proxy': }
+
 }
