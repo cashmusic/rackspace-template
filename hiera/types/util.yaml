@@ -22,6 +22,12 @@ site_profile::puppetmaster::firewall_rules:
   '110 allow puppet agent from prod-web5':
     port: 8140
     source: prod-web5.cashmusic.org
+  '110 allow puppet agent from dev-multi1':
+    port: 8140
+    source: dev-multi1.cashmusic.org
+  '110 allow puppet agent from stage-multi1':
+    port: 8140
+    source: stage-multi1.cashmusic.org
 
 site_profile::jenkins::firewall_rules:
   '140 allow github hooks':
