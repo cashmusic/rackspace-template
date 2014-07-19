@@ -12,10 +12,16 @@ classes:
 site_profile::puppetmaster::firewall_rules:
   '110 allow puppet agent from prod-db1':
     port: 8140
-    source: 23.253.161.246
+    source: prod-db1.cashmusic.org
+  '110 allow puppet agent from prod-web1':
+    port: 8140
+    source: prod-web1.cashmusic.org
+  '110 allow puppet agent from prod-web2':
+    port: 8140
+    source: prod-web2.cashmusic.org
   '110 allow puppet agent from prod-web5':
     port: 8140
-    source: 23.253.55.164
+    source: prod-web5.cashmusic.org
 
 site_profile::jenkins::firewall_rules:
   '140 allow github hooks':
