@@ -39,6 +39,7 @@ class site_profile::base {
   }
 
   # Hosts file
+  # This hiera hash is defined in the private hiera datastore.
   $hosts = hiera_hash('site_profile::base::hosts', {})
   $equivalent_hosts = hiera_hash('site_profile::base::equivalent_hosts', [])
   file { "/etc/hosts":
