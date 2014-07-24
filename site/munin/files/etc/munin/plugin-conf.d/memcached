@@ -1,0 +1,12 @@
+[11211_memcached_new_*]
+env.host 127.0.0.1
+env.port 11211
+env.timescale 3
+env.cmds get set delete incr decr touch
+env.leitime -1
+[11212_memcached_new_*]
+env.host 127.0.0.1
+env.port 11212
+env.timescale 3
+env.cmds get set delete incr decr touch
+env.leitime -1

@@ -4,3 +4,9 @@
 ## Class definitions.
 classes:
   - site_profile::db
+
+##################################################
+## Munin Configuration.
+
+munin::plugins:
+  - mysql

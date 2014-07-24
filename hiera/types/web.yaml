@@ -10,3 +10,18 @@ classes:
 site_profile::web::firewall_rules:
   '100 allow http and https access':
     port: [80, 443]
+
+##################################################
+## Munin Configuration.
+
+munin::plugins:
+  - apache_accesses
+  - apache_volume
+  - apache_processes
+  - apachessl_processes
+  - php_apc_files: php_apc_
+  - php_apc_fragmentation: php_apc_
+  - php_apc_hit_miss: php_apc_
+  - php_apc_purge: php_apc_
+  - php_apc_rates: php_apc_
+  - php_apc_usage: php_apc_

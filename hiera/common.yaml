@@ -19,6 +19,12 @@ site_profile::base::firewall_rules:
   '010 allow ssh access':
     port: [22]
 
+# Firewall config for Munin clients.
+munin::firewall_rules:
+  '015 allow munin access':
+    port: 4949
+    source: prod-util1.cashmusic.org
+
 ##################################################
 ## Puppet configuration.
 puppet::agent::puppet_server: prod-util1.cashmusic.org
@@ -247,3 +253,28 @@ site_profile::db::mysql_options:
 site_profile::db::mysql_additional_pkgs:
   - percona-toolkit
   - percona-xtrabackup
+
+#############################################
+# Munin Settings.
+munin::plugins:
+  - cpu
+  - df
+  - df_inode
+  - diskstats
+  - entropy
+  - forks
+  - fw_packets
+  - interrupts
+  - irqstats
+  - load
+  - memory
+  - netstat
+  - open_files
+  - open_inodes
+  - processes
+  - proc_pri
+  - swap
+  - threads
+  - uptime
+  - users
+  - vmstat
