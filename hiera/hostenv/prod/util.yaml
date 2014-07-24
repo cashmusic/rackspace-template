@@ -1,0 +1,8 @@
+# Configuration for prod util servers.
+
+##############################################
+# Munin Configuration.
+munin::plugins:
+  - postfix_mailqueue
+  - postfix_mailstats
+  - postfix_mailvolume
