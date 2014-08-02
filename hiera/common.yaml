@@ -8,6 +8,7 @@
 classes:
  - site_profile::base
  - puppet::agent
+ - munin
 
 #############################################
 # Global enable/disable flags.

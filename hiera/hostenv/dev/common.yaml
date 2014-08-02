@@ -1,6 +1,1 @@
 # Configuration for Dev servers (all types).
-
-##############################################
-## Class definitions.
-classes:
-  - munin
