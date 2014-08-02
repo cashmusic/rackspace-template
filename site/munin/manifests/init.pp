@@ -17,9 +17,9 @@ class munin {
   file { "/usr/share/munin/plugins":
     source => "puppet:///modules/munin/usr/share/munin/plugins",
     mode => 0755,
-    require => Package['munin-node'],
     recurse => true,
     purge => false,
+    require => Package['munin-node'],
   }
 
   file { '/usr/lib64/perl5/Munin':
@@ -35,14 +35,15 @@ class munin {
     ],
     recurse => true,
     purge => true,
+    require => Package['munin-node'],
   }
 
 # Remove all unmanaged links; we'll the the ones in we need
   file { "/etc/munin/plugins":
     ensure => directory,
-    require => Package['munin-node'],
     recurse => true,
     purge => true,
+    require => Package['munin-node'],
   }
 
   # Adminscripts required for php_apc, only on webserver hosts.
@@ -51,6 +52,7 @@ class munin {
     ensure => directory,
     recurse => true,
     purge => true,
+    require => Package['munin-node'],
   }
 
   # Get network interface links based on fact $interfaces except loopback
@@ -104,12 +106,14 @@ define munin::interface_plugin_link($interface = $title) {
     target => "/usr/share/munin/plugins/if_",
     force => true,
     notify => Service['munin-node'],
+    require => Package['munin-node'],
   }
   file {"/etc/munin/plugins/if_err_${interface}":
     ensure => link,
     target => "/usr/share/munin/plugins/if_err_",
     force => true,
     notify => Service['munin-node'],
+    require => Package['munin-node'],
   }
 
 }
