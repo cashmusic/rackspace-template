@@ -6,6 +6,9 @@ class munin::server {
     source => "puppet:///modules/munin/etc/httpd/conf.d/munin-cgi.conf",
   }
 
+  # Ensure apache is listening on port 443 for the web interface.
+  apache::listen { '443': }
+
   file { "/etc/munin/munin.conf":
     owner => root,
     group => root,
