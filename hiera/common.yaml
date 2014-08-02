@@ -195,12 +195,20 @@ site_profile::web::vhosts:
     port: 80
     docroot: /var/www/cash_platform
     default_vhost: true
+    aliases:
+      - alias: "/adminscripts"
+        path: "/etc/munin/adminscripts"
     directories:
-      path: /var/www/cash_platform
-      allow_override: All
-      options:
-        - FollowSymLinks
-        - MultiViews
+      - path: /var/www/cash_platform
+        allow_override: All
+        options:
+          - FollowSymLinks
+          - MultiViews
+      - path: /etc/munin/adminscripts
+        options:
+          - Indexes
+        order: "allow,deny"
+        allow: "from 127.0.0.1"
 
 #############################################
 # MySQL Settings.
