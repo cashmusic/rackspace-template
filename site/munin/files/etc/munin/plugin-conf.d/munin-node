@@ -1,6 +1,6 @@
 [apache_*]
-env.port 81,443
+env.port 80,443
 env.url http://localhost:%d/server-status?auto
 env.urls http://localhost:%d/server-status?auto
-env.ports 81,443
+env.ports 80,443
 env.ssl yes
