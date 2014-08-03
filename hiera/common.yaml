@@ -211,6 +211,14 @@ site_profile::web::vhosts:
         allow: "from 127.0.0.1"
 
 #############################################
+# Apache Settings.
+# Defaults -- these are be overridden for specific environments.
+apache::mod::prefork::maxclients: '125'
+apache::mod::prefork::maxrequestsperchild: '2000'
+apache::mod::prefork::startservers: '20'
+
+
+#############################################
 # MySQL Settings.
 # MySQL client packages.
 site_profile::dbclient::mysql_client_packages:

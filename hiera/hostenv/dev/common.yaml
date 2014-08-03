@@ -1,1 +1,6 @@
 # Configuration for Dev servers (all types).
+
+#############################################
+# Apache Settings.
+# Defaults -- these are be overridden for specific environments.
+apache::mod::prefork::maxclients: '25'
