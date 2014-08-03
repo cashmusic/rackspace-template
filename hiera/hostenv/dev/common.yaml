@@ -4,3 +4,4 @@
 # Apache Settings.
 # Defaults -- these are be overridden for specific environments.
 apache::mod::prefork::maxclients: '25'
+apache::mod::prefork::serverlimit: '25'

@@ -214,6 +214,7 @@ site_profile::web::vhosts:
 # Apache Settings.
 # Defaults -- these are be overridden for specific environments.
 apache::mod::prefork::maxclients: '125'
+apache::mod::prefork::serverlimit: '125'
 apache::mod::prefork::maxrequestsperchild: '2000'
 apache::mod::prefork::startservers: '20'
 
