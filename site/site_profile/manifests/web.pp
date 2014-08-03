@@ -64,6 +64,13 @@ class site_profile::web {
     notify => Service['httpd'],
   }
 
+  # /server-status location is setup so that Munin can monitor apache status on web servers.
+  file { "/etc/httpd/conf.d/server-status.conf":
+    source => "puppet:///modules/site_profile/etc/httpd/conf.d/server-status.conf",
+    require => Class['apache'],
+    notify => Service['httpd'],
+  }
+
   # Create apache vhosts.
   $vhosts = hiera('vhosts', {} )
   create_resources('apache::vhost', $vhosts)
