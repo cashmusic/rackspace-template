@@ -36,6 +36,7 @@ class munin {
     recurse => true,
     purge => true,
     require => Package['munin-node'],
+    notify => Service["munin-node"],
   }
 
 # Remove all unmanaged links; we'll the the ones in we need
