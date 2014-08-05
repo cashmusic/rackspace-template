@@ -296,3 +296,7 @@ munin::plugins:
   - uptime
   - users
   - vmstat
+
+# Munin database monitoring login. Password should be in the private hiera backend.
+munin::db_monitor::user: munin
+munin::db_monitor::hostname: localhost

@@ -5,6 +5,7 @@
 classes:
   - site_profile::db
   - site_profile::web
+  - munin::db_monitor
 
 ##############################################
 ## Firewall Rules.

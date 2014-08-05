@@ -4,6 +4,7 @@
 ## Class definitions.
 classes:
   - site_profile::db
+  - munin::db_monitor
 
 ##################################################
 ## Munin Configuration.
