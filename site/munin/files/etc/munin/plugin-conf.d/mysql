@@ -1,7 +1,0 @@
-[mysql*]
-# Manual Setup currently required:
-# GRANT SUPER, PROCESS on *.* to `munin`@`localhost` IDENTIFIED BY 'on1xqs1oh41T';
-# GRANT SELECT ON mysql.* to `munin`@`localhost`;
-env.mysqlconnection DBI:mysql:mysql;host=localhost;port=3306
-env.mysqluser munin
-env.mysqlpassword on1xqs1oh41T
