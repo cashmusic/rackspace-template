@@ -29,12 +29,14 @@ class munin {
     source => "puppet:///modules/munin/usr/lib64/perl5/Munin",
   }
 
+  # Ignore "mysql" in this copy since it is copied out as a template where needed.
   file { "/etc/munin/plugin-conf.d":
     source => [
       "puppet:///modules/munin/etc/munin/plugin-conf.d",
     ],
     recurse => true,
     purge => true,
+    ignore => "mysql",
     require => Package['munin-node'],
     notify => Service["munin-node"],
   }

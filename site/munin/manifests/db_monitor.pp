@@ -5,6 +5,7 @@ class munin::db_monitor (
 ) {
 
   require mysql::server
+  require munin
 
   # Create a monitoring user for Munin.
   mysql_user { "${user}@${hostname}":
@@ -27,6 +28,14 @@ class munin::db_monitor (
     table      => 'mysql.*',
     privileges => [ 'SELECT' ],
     require    => Mysql_user["${user}@${hostname}"],
+  }
+
+  # Configure MySQL munin plugin.
+  file { "/etc/munin/plugin-conf.d/mysql":
+    owner => root,
+    group => root,
+    mode => 0600,
+    content => template('munin/etc/munin/plugin-conf.d/mysql.erb'),
   }
 
 }
