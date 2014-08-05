@@ -1,7 +1,7 @@
 class munin::db_monitor (
-  user => "munin",
-  password => undef,
-  hostname => "localhost",
+  $user => "munin",
+  $password => undef,
+  $hostname => "localhost",
 ) {
 
   require mysql::server
