@@ -218,6 +218,11 @@ apache::mod::prefork::serverlimit: '125'
 apache::mod::prefork::maxrequestsperchild: '2000'
 apache::mod::prefork::startservers: '20'
 
+# Enable Keepalive
+apache::keepalive: 'On'
+apache::keepalive_timeout: '10'
+apache::max_keepalive_requests: '50'
+
 
 #############################################
 # MySQL Settings.
