@@ -9,6 +9,7 @@ classes:
  - site_profile::base
  - puppet::agent
  - munin
+ - ntp
 
 #############################################
 # Global enable/disable flags.
