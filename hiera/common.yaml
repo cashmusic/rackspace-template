@@ -104,7 +104,6 @@ site_profile::base::base_packages:
   - lsof
   - man
   - mlocate
-  - ntp
   - perl-DBM-Deep
   - strace
   - tcpdump
