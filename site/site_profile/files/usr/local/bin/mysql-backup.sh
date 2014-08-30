@@ -56,9 +56,9 @@ grep -q "$mypid" "$lockfile" || exit 1
 if [ -e "$mycnf" ]; then
   # Clean up old backups.
   find "$backupdir" -maxdepth 1 -type f -name '*.sql.gz' -mtime +$cleanuptime -delete;
-  for db in $(mysql --defaults-extra-file="$mycnf" -h localhost -Ne 'show databases' | grep -vE '^performance_schema$' | /grep -vE '^information_schema$'); do
+  for db in $(mysql --defaults-extra-file="$mycnf" -h localhost -Ne 'show databases' | grep -vE '^performance_schema$' | grep -vE '^information_schema$'); do
     backupfile=${backupdir}/${backupdate}-${db}.sql.gz
-    mysqldump --defaults-extra-file="$mycnf" --single-transaction -h localhost "$db" | /gzip > $backupfile
+    mysqldump --defaults-extra-file="$mycnf" --single-transaction -h localhost "$db" | gzip > $backupfile
     chmod 600 $backupfile
     # Create "latest" symlink for each DB backup.
     latestsymlink=${backupdir}/latest-${db}.sql.gz
