@@ -19,3 +19,13 @@ site_profile::db::mysql_options:
   mysqld:
     max_connections: '150'
     innodb_buffer_pool_size: '2G'
+
+# Enable MySQL backups on production.
+site_profile::db::enable_backups: false
+
+site_profile::db::cronjobs:
+  'daily mysqldump backup':
+    hour: 4
+    minute: 28
+    user: root
+    command: "/usr/local/bin/mysql-backup.sh 2>/dev/null || echo 'Nightly MySQL backup failed'"

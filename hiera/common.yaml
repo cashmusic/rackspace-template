@@ -277,6 +277,10 @@ site_profile::db::mysql_additional_pkgs:
   - percona-toolkit
   - percona-xtrabackup
 
+# Backup configuration - by default, don't backup mysql.
+# This is overridden for at least production hosts in more specific hiera files.
+site_profile::db::enable_backups: false
+
 #############################################
 # Munin Settings.
 munin::plugins:

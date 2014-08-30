@@ -37,4 +37,24 @@ class site_profile::db {
     source => "puppet:///modules/site_profile/usr/local/bin/mysqlreport",
   }
 
+  # Copy out MySQL backup script and setup cron job.
+  if (hiera('site_profile::db::enable_backups', false)) {
+    file { "/usr/local/bin/mysql-backup.sh":
+      owner => root,
+      group => root,
+      mode => 755,
+      source => "puppet:///modules/site_profile/usr/local/bin/mysql-backup.sh",
+    }
+
+    file { ["/var/backup", "/var/backup/mysql"]:
+      owner => root,
+      group => root,
+      ensure => directory,
+    }
+
+    $db_crons = hiera_hash('site_profile::db::cronjobs', {})
+    create_resources('cron', $db_crons)
+
+  }
+
 }
