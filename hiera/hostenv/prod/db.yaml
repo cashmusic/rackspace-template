@@ -21,7 +21,7 @@ site_profile::db::mysql_options:
     innodb_buffer_pool_size: '2G'
 
 # Enable MySQL backups on production.
-site_profile::db::enable_backups: false
+site_profile::db::enable_backups: true
 
 site_profile::db::cronjobs:
   'daily mysqldump backup':
