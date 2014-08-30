@@ -46,7 +46,7 @@ class site_profile::db {
       source => "puppet:///modules/site_profile/usr/local/bin/mysql-backup.sh",
     }
 
-    file { ["/var/backup", "/var/backup/mysql"]:
+    file { ["/data/backup", "/data/backup/mysql"]:
       owner => root,
       group => root,
       ensure => directory,
