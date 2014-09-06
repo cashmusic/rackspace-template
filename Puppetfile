@@ -16,6 +16,7 @@ mod 'rtyler/jenkins', '1.1.0'
 mod 'saz/sudo', '3.0.2'
 mod 'saz/ssh', '2.3.4'
 mod 'stephenrjohnson/puppet', '0.0.20'
+mod 'thias/postfix', '0.3.3'
 mod 'treydock/yum_cron', '1.0.0'
 mod 'torrancew/account', '0.0.5'
 

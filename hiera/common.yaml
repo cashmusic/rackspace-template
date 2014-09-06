@@ -309,3 +309,21 @@ munin::plugins:
 # Munin database monitoring login. Password should be in the private hiera backend.
 munin::db_monitor::user: munin
 munin::db_monitor::hostname: localhost
+
+#############################################
+# Mail Settings.
+
+# We need cyrus-sasl-plain for SASL auth to Mandrill.
+site_profile::mail::mail_packages:
+  - cyrus-sasl-plain
+
+# Postfix configuration.
+postfix::server::mydomain: 'cashmusic.org'
+postfix::server::inet_protocols: 'ipv4'
+postfix::server::relayhost: '[smtp.mandrillapp.com]'
+postfix::server::smtp_sasl_auth: true
+postfix::server::smtp_sasl_password_maps: 'hash:/etc/postfix/sasl_passwd'
+postfix::server::smtp_sasl_security_options: 'noanonymous'
+postfix::server::smtp_tls_CAfile: '/etc/pki/tls/certs/ca-bundle.crt'
+postfix::server::smtp_tls_security_level: 'may'
+postfix::server::smtp_use_tls: true
