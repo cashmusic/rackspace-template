@@ -319,6 +319,7 @@ site_profile::mail::mail_packages:
 
 # Postfix configuration.
 postfix::server::mydomain: 'cashmusic.org'
+postfix::server::myorigin: '$mydomain'
 postfix::server::inet_protocols: 'ipv4'
 postfix::server::relayhost: '[smtp.mandrillapp.com]'
 postfix::server::smtp_sasl_auth: true
