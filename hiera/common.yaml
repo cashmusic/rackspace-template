@@ -7,6 +7,7 @@
 # More specific classes are listed in types/{nodetype}.yml
 classes:
  - site_profile::base
+ - site_profile::mail
  - puppet::agent
  - munin
  - ntp

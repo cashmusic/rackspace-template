@@ -1,11 +1,6 @@
 # Configuration for Dev servers (all types).
 
 #############################################
-# Class definitions.
-classes:
- - site_profile::mail
-
-#############################################
 # Apache Settings.
 # Defaults -- these are be overridden for specific environments.
 apache::mod::prefork::maxclients: '25'
