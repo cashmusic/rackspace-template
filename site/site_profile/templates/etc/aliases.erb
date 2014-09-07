@@ -80,7 +80,7 @@ marketing:	postmaster
 sales:		postmaster
 support:	postmaster
 
-<% @alias_entries.keys.sort.each do |alias_entry| -%>
-<%= alias_entry %>: <%= @alias_entries[alias_entry] %>
+<% @alias_entries.each_pair do |alias_source, alias_dest| %>
+<%= alias_source %>: <%= alias_dest %>
 <% end -%>
 
