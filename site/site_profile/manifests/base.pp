@@ -26,6 +26,12 @@ class site_profile::base {
     priority => 10,
     content  => "%wheel ALL=(ALL) ALL",
   }
+  # Allow ssh auth to remain live through sudo
+  sudo::conf { 'allow_ssh_key':
+    priority => "05",
+    content => 'Defaults timestamp_timeout=60
+Defaults env_keep+=SSH_AUTH_SOCK',
+  }
 
   ## Enable/configure sshd -- settings stored in hiera.
   class { 'ssh::server': }
