@@ -194,13 +194,13 @@ apache::default_vhost: false
 site_profile::web::vhosts:
   platform_default:
     port: 80
-    docroot: /var/www/cash_platform
+    docroot: /var/www/cash_platform/interfaces
     default_vhost: true
     aliases:
       - alias: "/adminscripts"
         path: "/etc/munin/adminscripts"
     directories:
-      - path: /var/www/cash_platform
+      - path: /var/www/cash_platform/interfaces
         allow_override: All
         options:
           - FollowSymLinks

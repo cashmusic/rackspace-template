@@ -1,0 +1,24 @@
+# Settings specific to host prod-web5.cashmusic.org.
+
+# This host overrides the default vhost definition because it already went
+# live with different paths than are now in the repo (as of 9/8/2014).
+# This can go away once prod-web5 is migrated to the new repo/webroot layout.
+site_profile::web::vhosts:
+  platform_default:
+    port: 80
+    docroot: /var/www/cash_platform
+    default_vhost: true
+    aliases:
+      - alias: "/adminscripts"
+        path: "/etc/munin/adminscripts"
+    directories:
+      - path: /var/www/cash_platform
+        allow_override: All
+        options:
+          - FollowSymLinks
+          - MultiViews
+      - path: /etc/munin/adminscripts
+        options:
+          - Indexes
+        order: "allow,deny"
+        allow: "from 127.0.0.1"
