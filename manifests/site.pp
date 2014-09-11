@@ -26,6 +26,10 @@ Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
 # don't need to be defined with each rule.
 Firewall { proto => tcp, action => accept }
 
+# Default Package settings.
+# Avoid warning from newer versions of Puppet.
+Package {  allow_virtual => false, }
+
 node default {
   stage { 'pre': before => Stage['main'] }
   class { 'yumrepos::epel': stage => 'pre' }
