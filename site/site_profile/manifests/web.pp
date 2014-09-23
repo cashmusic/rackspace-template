@@ -10,21 +10,19 @@ class site_profile::web {
   # Create apache vhosts.
   create_resources('apache::vhost', hiera_hash('site_profile::web::vhosts', {}))
 
-  # The default log rotator for httpd is not required because we use cronolog.
+  # Configure logrotate for apache logs.
   file { "/etc/logrotate.d/httpd":
-    ensure => absent,
+    source => "puppet:///modules/site_profile/etc/logrotate.d/httpd",
     require => Package['httpd'],
   }
 
-  # Log rotation/cleaning scripts for cronolog apache logs.
-  $log_retention_days = hiera('site_profile::web::log_retention_days', 14)
+  # No longer using these scripts, remove following two files stanzas
+  # after puppet has removed the files. (9/22/14).
   file { "/etc/cron.daily/clean-httpdlogs.sh":
-    content => template('site_profile/etc/cron.daily/clean-httpdlogs.sh.erb'),
-    mode => 0755,
+    ensure => absent,
   }
   file { "/etc/cron.daily/compress-httpdlogs.sh":
-    source => "puppet:///modules/site_profile/etc/cron.daily/compress-httpdlogs.sh",
-    mode => 0755,
+    ensure => absent,
   }
 
   # PHP
