@@ -76,4 +76,14 @@ class site_profile::web {
     notify => Service['httpd'],
   }
 
+  # CASHMusic application configuration - per-instance configurations live in /etc/cashmusic/<instance>/.
+  file { "/etc/cashmusic":
+    ensure => directory,
+    recurse => true,
+    source => [
+                "puppet:///infra_private/etc/cashmusic",
+                "puppet:///modules/site_profile/etc/cashmusic",
+              ],
+ }
+
 }
