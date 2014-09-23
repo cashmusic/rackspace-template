@@ -7,6 +7,12 @@ class site_profile::web {
   # Setup Apache base class.
   class  { 'apache': }
 
+  # Web-related directories that may not be managed by the apache::vhosts themselves.
+  $web_dirs = hiera_hash('site_profile::web::web_dirs', {})
+  if ($web_dirs != {}) {
+    create_resources('file', $web_dirs, {'ensure' => directory,})
+  }
+
   # Create apache vhosts.
   create_resources('apache::vhost', hiera_hash('site_profile::web::vhosts', {}))
 
