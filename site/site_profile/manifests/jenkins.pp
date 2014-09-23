@@ -19,6 +19,19 @@ class site_profile::jenkins {
     require => Class['::jenkins'],
   }
 
+  # SSH configuration.
+  file { "/var/lib/jenkins/.ssh/config":
+    ensure => file,
+    source => [
+                "puppet:///infra_private/var/lib/jenkins/dot_ssh/config",
+                "puppet:///modules/site_profile/var/lib/jenkins/dot_ssh/config",
+              ],
+    mode => 0600,
+    owner => 'jenkins',
+    group => 'jenkins',
+    require => File['/var/lib/jenkins/.ssh'],
+  }
+
   # SSH private key - real file is in private repo,
   # default is just a placeholder for hosts outside the main infrastructure.
   file { "/var/lib/jenkins/.ssh/id_rsa":
