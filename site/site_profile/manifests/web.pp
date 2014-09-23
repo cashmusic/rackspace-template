@@ -16,15 +16,6 @@ class site_profile::web {
     require => Package['httpd'],
   }
 
-  # No longer using these scripts, remove following two files stanzas
-  # after puppet has removed the files. (9/22/14).
-  file { "/etc/cron.daily/clean-httpdlogs.sh":
-    ensure => absent,
-  }
-  file { "/etc/cron.daily/compress-httpdlogs.sh":
-    ensure => absent,
-  }
-
   # PHP
   create_resources('php::ini', hiera_hash('site_profile::web::php_ini', {}))
   class { 'php::cli': }
@@ -69,10 +60,6 @@ class site_profile::web {
     notify => Service['httpd'],
   }
 
-  # Create apache vhosts.
-  $vhosts = hiera('vhosts', {} )
-  create_resources('apache::vhost', $vhosts)
-
   # Web nodes are behind a load balancer, we need mod_extract_forwarded to get the client IP,
   # and that requires mod_proxy.
   class { 'apache::mod::proxy': }
@@ -88,5 +75,15 @@ class site_profile::web {
     require => [ Package['mod_extract_forwarded'], Class['apache'] ],
     notify => Service['httpd'],
   }
+
+  # CASHMusic application configuration - per-instance configurations live in /etc/cashmusic/<instance>/.
+  file { "/etc/cashmusic":
+    ensure => directory,
+    recurse => true,
+    source => [
+                "puppet:///infra_private/etc/cashmusic",
+                "puppet:///modules/site_profile/etc/cashmusic",
+              ],
+ }
 
 }
