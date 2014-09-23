@@ -16,15 +16,6 @@ class site_profile::web {
     require => Package['httpd'],
   }
 
-  # No longer using these scripts, remove following two files stanzas
-  # after puppet has removed the files. (9/22/14).
-  file { "/etc/cron.daily/clean-httpdlogs.sh":
-    ensure => absent,
-  }
-  file { "/etc/cron.daily/compress-httpdlogs.sh":
-    ensure => absent,
-  }
-
   # PHP
   create_resources('php::ini', hiera_hash('site_profile::web::php_ini', {}))
   class { 'php::cli': }
