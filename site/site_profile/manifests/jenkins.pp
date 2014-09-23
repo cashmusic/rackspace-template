@@ -47,6 +47,30 @@ class site_profile::jenkins {
     require => File['/var/lib/jenkins/.ssh'],
   }
 
+  # Deploy ssh keys.
+  file { "/var/lib/jenkins/.ssh/jenkins_deploy_key":
+    ensure => file,
+    source => [
+                "puppet:///infra_private/var/lib/jenkins/dot_ssh/jenkins_deploy_key",
+                "puppet:///modules/site_profile/var/lib/jenkins/dot_ssh/jenkins_deploy_key",
+              ],
+    mode => 0600,
+    owner => 'jenkins',
+    group => 'jenkins',
+    require => File['/var/lib/jenkins/.ssh'],
+  }
+  file { "/var/lib/jenkins/.ssh/jenkins_deploy_key.pub":
+    ensure => file,
+    source => [
+                "puppet:///infra_private/var/lib/jenkins/dot_ssh/jenkins_deploy_key.pub",
+                "puppet:///modules/site_profile/var/lib/jenkins/dot_ssh/jenkins_deploy_key.pub",
+              ],
+    mode => 0600,
+    owner => 'jenkins',
+    group => 'jenkins',
+    require => File['/var/lib/jenkins/.ssh'],
+  }
+
   # Create directories that are be used by jenkins scripts.
   $jenkins_work_dirs = hiera_hash('site_profile::jenkins::work_directories', {})
   if ($jenkins_work_dirs != {}) {
