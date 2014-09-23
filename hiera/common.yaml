@@ -196,6 +196,8 @@ site_profile::web::vhosts:
     port: 80
     docroot: /var/www/cash_platform/interfaces
     default_vhost: true
+    docroot_owner: deploy
+    docroot_group: deploy
     aliases:
       - alias: "/adminscripts"
         path: "/etc/munin/adminscripts"
@@ -210,6 +212,8 @@ site_profile::web::vhosts:
           - Indexes
         order: "allow,deny"
         allow: "from 127.0.0.1"
+    require:
+      - User[deploy]
 
 #############################################
 # Apache Settings.
