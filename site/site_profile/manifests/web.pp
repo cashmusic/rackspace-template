@@ -10,6 +10,12 @@ class site_profile::web {
   # Create apache vhosts.
   create_resources('apache::vhost', hiera_hash('site_profile::web::vhosts', {}))
 
+  # Web-related directories that may not be managed by the apache::vhosts themselves.
+  $web_dirs = hiera_hash('site_profile::web::web_dirs', {})
+  if ($web_dirs != {}) {
+    create_resources('file', $web_dirs, {'ensure' => directory,})
+  }
+
   # Configure logrotate for apache logs.
   file { "/etc/logrotate.d/httpd":
     source => "puppet:///modules/site_profile/etc/logrotate.d/httpd",
