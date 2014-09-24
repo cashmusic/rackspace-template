@@ -3,6 +3,7 @@
 ##############################################
 ## Class definitions.
 classes:
+  - site_profile::dbclient
   - site_profile::web
 
 ##################################################
