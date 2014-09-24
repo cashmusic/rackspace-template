@@ -215,6 +215,15 @@ site_profile::web::vhosts:
     require:
       - User[deploy]
 
+# Web directories.
+# These are passed to create_resources, so any valid 'file' attributes can be used.
+site_profile::web::web_dirs:
+  '/var/www/cash_platform':
+    owner: deploy
+    group: deploy
+    require:
+      - User[deploy]
+
 #############################################
 # Apache Settings.
 # Defaults -- these are be overridden for specific environments.
