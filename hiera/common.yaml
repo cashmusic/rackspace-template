@@ -223,6 +223,11 @@ site_profile::web::web_dirs:
     group: deploy
     require:
       - User[deploy]
+  '/var/www/legal':
+    owner: deploy
+    group: deploy
+    require:
+      - User[deploy]
 
 #############################################
 # Apache Settings.
