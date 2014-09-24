@@ -86,10 +86,18 @@ class site_profile::web {
   file { "/etc/cashmusic":
     ensure => directory,
     recurse => true,
+    ignore => 'environment',
     source => [
                 "puppet:///infra_private/etc/cashmusic",
                 "puppet:///modules/site_profile/etc/cashmusic",
               ],
- }
+  }
+
+  # Each server has a file which defines what CASHMusic environment it's serving (testing/staging/production).
+  # This setting is stored in the hiera variable site_profile::web::deployment_environment.
+  $cash_env = hiera('site_profile::web::deployment_environment', 'unknown')
+  file { "/etc/cashmusic/environment":
+    content => template("site_profile/etc/cashmusic/environment.erb"),
+  }
 
 }

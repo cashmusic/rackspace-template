@@ -5,3 +5,7 @@
 # Defaults -- these are be overridden for specific environments.
 apache::mod::prefork::maxclients: '25'
 apache::mod::prefork::serverlimit: '25'
+
+#############################################
+# Deployment Settings.
+site_profile::web::deployment_environment: testing
