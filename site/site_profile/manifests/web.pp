@@ -100,16 +100,14 @@ class site_profile::web {
     content => template("site_profile/etc/cashmusic/environment.erb"),
   }
 
-  # Copy out deploy user's ssh directory from the private infra repo.
-  file { "/home/deploy/.ssh":
+  # Copy out deploy user's ssh key from the private infra repo.
+  file { "/home/deploy/.ssh/id_rsa":
     owner => deploy,
     group => deploy,
     mode => 0600,
-    recurse => true,
-    purge => false,
     source => [
-                "puppet:///infra_private/home/deploy/dot_ssh",
-                "puppet:///modules/site_profile/home/deploy/dot_ssh",
+                "puppet:///infra_private/home/deploy/dot_ssh/id_rsa",
+                "puppet:///modules/site_profile/home/deploy/dot_ssh/id_rsa",
               ],
     }
 
