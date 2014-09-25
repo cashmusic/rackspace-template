@@ -109,6 +109,20 @@ class site_profile::web {
                 "puppet:///infra_private/home/deploy/dot_ssh/id_rsa",
                 "puppet:///modules/site_profile/home/deploy/dot_ssh/id_rsa",
               ],
+    require => User['deploy'],
+  }
+
+  # Deploy user ssh config -- avoid errors for unknown host keys.
+  file { "/home/deploy/.ssh/config":
+    content => '# Managed by puppet
+Host *
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+',
+    mode => 0600,
+    owner => deploy,
+    group => deploy,
+    require => User['deploy'],
   }
 
   # Web deployment scripts.
