@@ -114,7 +114,7 @@ class site_profile::web {
   # Web deployment scripts.
   $web_deploy_scripts = hiera_array('site_profile::web::web_deploy_scripts', [])
   if ($web_deploy_scripts != []) {
-    site_profile::web::deployscript($web_deploy_scripts)
+    site_profile::web::deployscript{$web_deploy_scripts:}
   }
 
 }
