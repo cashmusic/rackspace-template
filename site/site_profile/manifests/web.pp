@@ -117,6 +117,13 @@ class site_profile::web {
     site_profile::web::deployscript{$web_deploy_scripts:}
   }
 
+  # Deploy sudo configuration.
+  sudo::conf { 'deploy':
+    priority => 15,
+    content  => "Defaults:deploy !requiretty
+deploy ALL=(root) NOPASSWD: /usr/local/bin/cash_ensure_cachedir.sh",
+  }
+
 }
 
 define site_profile::web::deployscript($script = $title) {
