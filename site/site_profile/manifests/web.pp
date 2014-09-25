@@ -128,3 +128,4 @@ define site_profile::web::deployscript($script = $title) {
               ],
     mode => 0755,
   }
+}
