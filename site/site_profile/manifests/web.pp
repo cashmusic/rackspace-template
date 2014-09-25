@@ -109,6 +109,22 @@ class site_profile::web {
                 "puppet:///infra_private/home/deploy/dot_ssh/id_rsa",
                 "puppet:///modules/site_profile/home/deploy/dot_ssh/id_rsa",
               ],
-    }
+  }
+
+  # Web deployment scripts.
+  $web_deploy_scripts = hiera_array('site_profile::web::web_deploy_scripts', [])
+  if ($web_deploy_scripts != []) {
+    site_profile::web::deployscript($web_deploy_scripts)
+  }
 
 }
+
+define site_profile::web::deployscript($script = $title) {
+  file {"/usr/local/bin/${script}":
+    ensure => file,
+    source => [
+                "puppet:///infra_private/usr/local/bin/${script}",
+                "puppet:///modules/site_profile/usr/local/bin/${script}",
+              ],
+    mode => 0755,
+  }

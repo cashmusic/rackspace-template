@@ -347,3 +347,9 @@ postfix::server::smtp_sasl_security_options: 'noanonymous'
 postfix::server::smtp_tls_CAfile: '/etc/pki/tls/certs/ca-bundle.crt'
 postfix::server::smtp_tls_security_level: 'may'
 postfix::server::smtp_use_tls: true
+
+#############################################
+# Deploy Settings.
+site_profile::web::web_deploy_scripts:
+  - cash_code_deploy.sh
+  - cash_ensure_cachedir.sh
