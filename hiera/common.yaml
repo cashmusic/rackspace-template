@@ -206,7 +206,6 @@ site_profile::web::vhosts:
         allow_override: All
         options:
           - FollowSymLinks
-          - MultiViews
       - path: /etc/munin/adminscripts
         options:
           - Indexes
