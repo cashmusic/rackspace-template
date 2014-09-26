@@ -22,6 +22,11 @@ class munin {
     require => Package['munin-node'],
   }
 
+  # Temporary - 9/26/14 - to remove old, unused plugin link.
+  file { '/etc/munin/plugins/apachessl_processes':
+    ensure => absent,
+  }
+
   file { '/usr/lib64/perl5/Munin':
     ensure => directory,
     recurse => true,
