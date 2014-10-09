@@ -3,6 +3,7 @@
     notifempty
     sharedscripts
     delaycompress
+    daily
     dateext
     rotate 30
     postrotate
