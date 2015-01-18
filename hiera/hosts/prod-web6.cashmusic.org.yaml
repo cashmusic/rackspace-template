@@ -1,0 +1,4 @@
+# Settings specific to host prod-web6.cashmusic.org.
+
+# Override default production environment label for AIR server.
+site_profile::web::deployment_environment: production-air
