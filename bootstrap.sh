@@ -26,9 +26,4 @@ rpm -q --quiet rubygem-deep-merge || yum -y install rubygem-deep-merge
 [[ "$(gem query -i -n r10k)" == "true" ]] || gem install --no-rdoc --no-ri r10k
 
 # Run r10k to pull in external modules.
-cd /vagrant && r10k -v info puppetfile install
-
-# TODO: review/fix this.
-# Rackspace Vagrant plugin seems to run puppet with /tmp module paths no matter what we configure.
-# This is a hacky workaround just to get things working without too much effort.
-rm -fr /tmp/vagrant-puppet-1/modules-0 && ln -s /vagrant/modules /tmp/vagrant-puppet-1/modules-0
+cd /etc/puppetmaster && r10k -v info puppetfile install
