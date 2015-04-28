@@ -37,7 +37,7 @@ puppet::agent::puppet_server: prod-util1.cashmusic.org
 ## Puppetmaster configuration.
 puppet::master::modulepath: "/etc/puppetmaster/modules:/etc/puppetmaster/site:/etc/puppetmaster/dist"
 puppet::master::manifest: "/etc/puppetmaster/manifests/site.pp"
-puppet::master::hiera_config: "/etc/puppetmaster/hiera/hiera.yaml"
+puppet::master::hiera_config: "/etc/puppetmaster/hiera.yaml"
 puppet::master::reports: "log,tagmail"
 site_profile::puppetmaster::puppet_all_notification_entries:
   - sysops@cashmusic.org

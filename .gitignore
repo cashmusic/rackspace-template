@@ -2,3 +2,4 @@ modules
 .vagrant
 Vagrantfile.local
 *.swp
+hiera_private
