@@ -78,14 +78,18 @@ Vagrant.configure('2') do |config|
   # Install r10k using the shell provisioner and download the Puppet modules
   config.vm.provision "shell", path: 'bootstrap.sh'
 
+  # Sync this directory to /etc/puppetmaster so that puppet/hiera config paths can be
+  # shared between Vagrant and production.
+  config.vm.synced_folder ".", "/etc/puppetmaster"
+
   # Puppet provisioner for primary configuration
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "manifests"
     puppet.module_path = [ "modules", "site", "dist" ]
     puppet.manifest_file  = "site.pp"
     puppet.hiera_config_path = "hiera.yaml"
-    puppet.working_directory = "/vagrant"
-    puppet.options = ""
+    puppet.working_directory = "/etc/puppetmaster"
+    puppet.options = "--verbose"
 
     # In vagrant environment it can be hard for facter to get this stuff right
     puppet.facter = {
@@ -102,4 +106,4 @@ def Kernel.is_windows?
   # Detect if we are running on Windows
   processor, platform, *rest = RUBY_PLATFORM.split("-")
   platform == 'mingw32'
-end
+en
