@@ -12,3 +12,6 @@ site_profile::base::allowhosts:
   - 127.0.0.1
   - 10.0.1.*
   - 10.0.2.*
+
+puppet::agent::puppet_server: 'localhost'
+puppet::agent::puppet_run_style: 'manual'
