@@ -25,5 +25,11 @@ rpm -q --quiet rubygem-deep-merge || yum -y install rubygem-deep-merge
 # Install r10k to handle Puppet module installation.
 [[ "$(gem query -i -n r10k)" == "true" ]] || gem install --no-rdoc --no-ri r10k
 
+# We need ruby-devel in order to install the system_timer gem.
+rpm -q --quiet ruby-devel || yum -y install ruby-devel
+
+# system_timer ruby gem is needed to avoid warnings on the CentOS 6 version of Ruby (1.8)
+[[ "$(gem query -i -n system_timer)" == "true" ]] || gem install --no-rdoc --no-ri system_timer
+
 # Run r10k to pull in external modules.
 cd /etc/puppetmaster && r10k -v info puppetfile install
