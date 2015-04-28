@@ -29,7 +29,7 @@ Vagrant.configure('2') do |config|
   # You can define a $vms array in Vagrantfile.local which says what vms should be launched.
   if !defined? $vms
     $vms =   {
-      "default" => { "fqdn" => "vagrant-test.cashmusic.org", "ipaddress" => "10.10.10.20", "memory" => "2048", "cpus" => "2" },
+      "default" => { "fqdn" => "vagrant-multi1.cashmusic.org", "ipaddress" => "10.10.10.20", "memory" => "2048", "cpus" => "2" },
     }
   end
   $vms.each do |name, attributes|
