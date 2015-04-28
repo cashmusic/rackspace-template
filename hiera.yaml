@@ -5,10 +5,10 @@
   - yaml
 
 :yaml:
-  :datadir: /etc/puppetmaster/hiera
+  :datadir: hiera
 
 :json:
-  :datadir: /srv/puppet/hiera_private
+  :datadir: hiera_private
 
 # We use deeper merge to be able to merge multi-level hashes (e.g. user accounts).
 :merge_behavior: deeper
