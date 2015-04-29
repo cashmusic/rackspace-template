@@ -40,16 +40,11 @@ $vms = {
 #
 #$dev_mounts = {
 #  "dev" => {
-#    "vm_mountpoint" => "/var/www/html/",
-#    "host_mountpoint" => "/path/to/host/directory/to/sync",
+#    "vm_mountpoint" => "/var/www/cash_platform/",
+#    "host_mountpoint" => "/Users/jeff/cashmusic/platform",
 #    "type" => "rsync",
 #    "rsync__args" => ["--verbose", "--archive", "--delete", "-z"],
-#    "rsync__exclude" => [".git/"]
+#    "rsync__exclude" => [".git/"],
 #    "rsync__auto" => false,
 #  },
-#  "otherfiles" => {
-#    "vm_mountpoint" => "/var/www/otherfiles",
-#    "host_mountpoint" => "/Users/you/otherfiles",
-#    "type" => "nfs",
-#    "mount_options:" => ["dmode=775", "fmode=664"]
-#  },
+#}
