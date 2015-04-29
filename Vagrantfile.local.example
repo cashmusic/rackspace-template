@@ -4,23 +4,52 @@
 # You can also use ~/.vagrant.d/Vagrantfile to provide overall config for all
 # vagrant instances.
 
-# To keep a yum cache, especially if you don't want to use bandwidth rebuilding,
-# uncomment
+# Changes to cpus, memory, etc. require a vagrant reload of course
+
+# Keeping a yum cache directory can help save bandwidth -- useful on a slow connection.
+# To enable: uncomment the next line and set it to a valid path on your host machine.
 # $vagrant_yum_cache = "/var/cache/vagrant/yum_cache"
 
+# You can configure many vms here if necessary.
+# Adjust memory and CPUs as needed.
+$vms = {
+  "default" => { "fqdn" => "vagrant-multi1.cashmusic.org", "ipaddress" => "10.10.10.20", "memory" => "2048", "cpus" => "2" },
+  }
 
-# SSH Settings
-# DON'T USE THE DEFAULT VAGRANT KEY!
-$ssh_private_key_path = '/path/to/local/ssh/private/key'
 
-# Rackspace Settings.
-# These are described at https://github.com/mitchellh/vagrant-rackspace
-$rackspace_user = 'your.rs.user.here.'
-$rackspace_api_key = 'rs.api.key'
-$rackspace_region = 'ord'
-$rackspace_flavor = '1 GB Performance'
-$rackspace_image = /CentOS/
-# If you have a key already installed in the RS cloud panel, you
-# can reference it here by name to have it installed in root's authorized_keys.
-$rackspace_key_name = 'vagrant_test_key'
-$rackspace_server_name = 'vagrant_test'
+# Provide list of source mounts. The type defaults to virtualbox, but you could
+# also use nfs (on Mac/Linux) or the rsync type.
+# See http://docs.vagrantup.com/v2/synced-folders/index.html
+#
+# Changes to mounts require a 'vagrant reload'.
+#
+# Using the 'rsync' mount type is suggested if you are mounting a Drupal webroot
+# because Drupal will have performance issues running from NFS or Virtalbox mounts.
+# http://docs.vagrantup.com/v2/synced-folders/rsync.html
+#
+# If you use the 'rsync' type you'll need to either manually rsync with
+# 'vagrant rsync' or run 'vagrant rsync-auto', which rsyncs continuously
+# as you change files on the host workstation.
+# If you want to use rsync-auto, it must be specified in the mount definition below.
+# http://docs.vagrantup.com/v2/cli/rsync-auto.html
+#
+# If rsync isn't an option, Linux and OS X hosts have better performance with NFS
+# mounts than with Virtualbox mounts. To use NFS mounts, you'll need to edit /etc/sudoers
+# on your host machine as described at:
+# https://docs.vagrantup.com/v2/synced-folders/nfs.html
+#
+#$dev_mounts = {
+#  "dev" => {
+#    "vm_mountpoint" => "/var/www/html/",
+#    "host_mountpoint" => "/path/to/host/directory/to/sync",
+#    "type" => "rsync",
+#    "rsync__args" => ["--verbose", "--archive", "--delete", "-z"],
+#    "rsync__exclude" => [".git/"]
+#    "rsync__auto" => false,
+#  },
+#  "otherfiles" => {
+#    "vm_mountpoint" => "/var/www/otherfiles",
+#    "host_mountpoint" => "/Users/you/otherfiles",
+#    "type" => "nfs",
+#    "mount_options:" => ["dmode=775", "fmode=664"]
+#  },

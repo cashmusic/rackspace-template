@@ -4,66 +4,106 @@
 # You can override or add to this file by configuring the Vagrantfile.local
 # Note the provided Vagrantfile.local.example
 
+# Require 1.6.2 since that's when the rsync synced folder was stabilized.
+Vagrant.require_version ">= 1.6.2"
+
 dirname = File.dirname(__FILE__)
 localfile = dirname + "/Vagrantfile.local"
 if File.exist?(localfile)
   load localfile
 end
 
+# Configure the domain
+if !defined? $domainname
+  $domainname = "cashmusic.org"
+end
+
 Vagrant.configure('2') do |config|
+  config.vm.box = "centos6.6-x86_64-50GB-disk-puppet-3.7.3-vbguestaddtions-20141212.box"
+  config.vm.box_url = "http://tag1consulting.com/files/centos6.6-x86_64-50GB-disk-puppet-3.7.3-vbguestaddtions-20141212.box"
 
-  # For Rackspace, we use a dummy box since we pull in a Rackspace image.
-  # For local work in Virtualbox, we should use a CentOS 6.5 box (puppetlabs provided box is fine).
-  config.vm.box     = 'dummy'
-  config.vm.box_url = 'https://github.com/mitchellh/vagrant-rackspace/raw/master/dummy.box'
+  # Enable ssh agent forwarding
+  config.ssh.forward_agent = true
 
-  # Private ssh key path (should be set in Vagrantfile.local)
-  config.ssh.private_key_path = $ssh_private_key_path
 
-  # Work around default CentOS sudo settings.
-  config.ssh.pty = true
-
-  config.vm.provider :rackspace do |rs|
-    # These are all set in Vagrantfile.local
-    rs.username = $rackspace_user
-    rs.api_key = $rackspace_api_key
-    rs.rackspace_region = $rackspace_region
-    rs.flavor = $rackspace_flavor
-    rs.image = $rackspace_image
-    rs.key_name = $rackspace_key_name
-    rs.server_name = $rackspace_server_name
+  # You can define a $vms array in Vagrantfile.local which says what vms should be launched.
+  if !defined? $vms
+    $vms =   {
+      "default" => { "fqdn" => "vagrant-multi1.cashmusic.org", "ipaddress" => "10.10.10.20", "memory" => "2048", "cpus" => "2" },
+    }
+  end
+  $vms.each do |name, attributes|
+    config.vm.define "#{name}" do |name|
+      # myvm.vm.provision "shell", inline: "echo hello from slave #{myname}"
+      name.vm.network :private_network, ip: attributes["ipaddress"]
+      name.vm.hostname = attributes['fqdn']
+      config.vm.provider "virtualbox" do |v|
+        v.memory = attributes['memory']
+        v.cpus = attributes['cpus']
+        # Enable APIC, which is required for multiple CPU support under Virtualbox.
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
+      end
+    end
   end
 
-  # Configure the domain
-  if !defined? $domainname
-    $domainname = "cashmusic.org"
+
+  # Optional share for yum packages so that they don't have be downloaded all the time
+  # when doing a clean build of different VMs.
+  # To turn this on, set vagrant_yum_cache in your Vagrantfile.local,
+  # $vagrant_yum_cache = "/var/cache/vagrantyum_cache"
+  if defined? $vagrant_yum_cache
+    config.vm.synced_folder $vagrant_yum_cache, "/var/cache/yum"
+    config.vm.provision "shell",
+      inline: "echo '--- Turning on yum caching in /etc/yum.conf ---'; perl -pi.bak -e 's/keepcache=0/keepcache=1/' /etc/yum.conf"
   end
 
-  # Configure the hostname
-  if !defined? $hostname
-    $hostname = "vagrant-test"
+  # Mount any development directories
+  if defined? $dev_mounts
+    # Default mount settings.
+
+    $dev_mounts.each do |mount, attributes|
+      # Handle mount options for various mount types.
+      # Mounts can be defined in Vagrantfile.local.
+      if attributes['type']=="virtualbox"
+        config.vm.synced_folder attributes['host_mountpoint'], attributes['vm_mountpoint'], type: attributes['type'], group: attributes['group'], mount_options: attributes['mount_options']
+      elsif attributes['type']=="rsync"
+          config.vm.synced_folder attributes['host_mountpoint'], attributes['vm_mountpoint'], type: attributes['type'], group: attributes['group'], rsync__exclude: attributes['rsync__exclude'], rsync__chown: attributes['rsync__chown'], rsync__auto: attributes['rsync__auto']
+      elsif attributes['type'] == 'nfs'
+        config.vm.synced_folder attributes['host_mountpoint'], attributes['vm_mountpoint'], type: attributes['type']
+      end
+    end
   end
-  $fqdn = "#{$hostname}.#{$domainname}"
-  config.vm.hostname = $fqdn
 
 
   # Install r10k using the shell provisioner and download the Puppet modules
-  config.vm.provision :shell, :path => 'bootstrap.sh'
+  config.vm.provision "shell", path: 'bootstrap.sh'
+
+  # Sync this directory to /etc/puppetmaster so that puppet/hiera config paths can be
+  # shared between Vagrant and production.
+  config.vm.synced_folder ".", "/etc/puppetmaster"
 
   # Puppet provisioner for primary configuration
-  config.vm.provision :puppet do |puppet|
+  config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "manifests"
     puppet.module_path = [ "modules", "site", "dist" ]
     puppet.manifest_file  = "site.pp"
-    puppet.hiera_config_path = "hiera/hiera.yaml"
-    puppet.working_directory = "/vagrant"
-    puppet.options = "--verbose"
+    puppet.hiera_config_path = "hiera.yaml"
+    puppet.working_directory = "/etc/puppetmaster"
+    puppet.options = ""
 
     # In vagrant environment it can be hard for facter to get this stuff right
     puppet.facter = {
-      "fqdn" => $fqdn,
-      "hostname" => $fqdn,
+      "dev_environment" => "vagrant",
+      "domain" => $domainname,
     }
-
   end
+end
+
+
+# Determine if we are on windows
+# http://happykoalas.com/blog/2012/04/vagrant-and-using-nfs-only-on-non-windows-host/
+def Kernel.is_windows?
+  # Detect if we are running on Windows
+  processor, platform, *rest = RUBY_PLATFORM.split("-")
+  platform == 'mingw32'
 end

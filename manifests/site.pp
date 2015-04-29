@@ -35,17 +35,19 @@ node default {
   class { 'yumrepos::epel': stage => 'pre' }
   class { 'yumrepos::ius': stage => 'pre' }
 
-
   # Firewall setup
-  resources { "firewall":
-    purge => true
+  $enable_firewall = hiera('enable_firewall', TRUE)
+  if($enable_firwall) {
+    resources { "firewall":
+      purge => true
+    }
+    class { 'firewall': stage => 'pre' }
+    Firewall {
+      before  => Class['site_firewall::post'],
+      require => Class['site_firewall::pre'],
+    }
+    class { 'site_firewall::pre': stage => 'pre' }
+    class { 'site_firewall::post': }
   }
-  class { 'firewall': }
-  Firewall {
-    before  => Class['site_firewall::post'],
-    require => Class['site_firewall::pre'],
-  }
-  class { ['site_firewall::pre', 'site_firewall::post']: }
-
 
 }

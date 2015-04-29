@@ -31,6 +31,9 @@ class site_profile::web {
   # php-fpm ships with a default 'www' config, so we default to that.
   create_resources('php::fpm::conf', hiera_hash('site_profile::web::php_fpm_conf', {}))
 
+  # Be sure Apache is installed before FPM because we need the 'apache' user.
+  Class['apache'] -> Class['php::fpm::daemon']
+
   # Install PHP modules (extensions).
   $php_packages = hiera_array('site_profile::web::php_packages', [])
   $php_pear_packages = hiera_array('site_profile::web::php_pear_packages', [])
