@@ -9,7 +9,6 @@ classes:
  - site_profile::base
  - site_profile::mail
  - puppet::agent
- - munin
  - ntp
 
 #############################################
@@ -251,6 +250,7 @@ site_profile::dbclient::mysql_client_packages:
   - mysqlclient16
 # Default to MySQL 5.5 package from IUS.
 mysql::server::package_name: 'mysql55-server'
+mysql::client::package_manage: FALSE
 
 # my.cnf default settings
 site_profile::db::mysql_options:

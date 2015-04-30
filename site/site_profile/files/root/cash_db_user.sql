@@ -1,0 +1,1 @@
+INSERT INTO people (email_address,password,username,is_admin,api_key,api_secret,creation_date) VALUES ('dev@cashmusic.org','$2a$13$3a555071de7b0f2203e50Og9JxySBAC/wHlcQCvnx61NrcyJX07pS','dev',1,'0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a','1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b',1430347107);

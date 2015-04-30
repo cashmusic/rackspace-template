@@ -1,33 +1,31 @@
-Rackspace template
-==================
+# CASH Music Infrastructure
 
-A Vagrant environment for launching new CASH instances on Rackspace cloud servers. This lets us launch platform instances in the Rackspace cloud. Right now this is a very basic configuration — SQLite instead of MySQL and an unhardened Apache.
+This repo contains the Puppet scripts used to configure the CASH Music infrastructure and developer VMs.
 
-All that's needed to get it working is [Vagrant](http://www.vagrantup.com/) and [the Rackspace Vagrant plugin](http://developer.rackspace.com/blog/vagrant-now-supports-rackspace-open-cloud.html). There are a few configuration steps before getting the machine going:
+For developers, all that's needed to get it working is [Vagrant](http://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/). You can also install the [Vagrant Hostsupdater plugin](https://github.com/cogitatio/vagrant-hostsupdater) if you'd like Vagrant to automatically add an entry to your local hosts file. There are a few configuration steps before getting the machine going:
 
-1. Copy Vagrantfile.local.example to Vagrantfile.local
-2. Add your Rackspace username and API key to Vagrantfile.local
-3. Generate a new set of SSH keys. Do this. Do it. You need to do it. Why do you hate security?
-4. Put the keys in your ~/.ssh folder, then point to them in Vagrantfile.local
-5. Optional: Edit the Rackspace settings in Vagrantfile.local to specify region, and type of VM ("rackspace_flavor"). At this point, *only* CentOS 6.x is supported.
+1. Install Vagrant, Virtualbox, and optionally the hostsupdater plugin (```vagrant plugin install vagrant-hostsupdater``` after installing Vagrant).
+2. Clone this repo.
+3. Clone the [CASH Music Platform repo](https://github.com/cashmusic/platform).
+4. Copy Vagrantfile.local.example to Vagrantfile.local
+5. Edit Vagrantfile.local to point the dev mount to your local clone of the Platform repo. Optionally configure the VM CPU and memory allocations or VM IP address.
+6. Optionally: edit your /etc/hosts file to add an entry for the virtual machine (or let the Hostsupdater plugin do this for you automatically).
   
 You're good. Now all you need is:
   
 ```
-vagrant up --provider=rackspace
+vagrant up
 ```
-  
 
-General notes
--------------
-We rely on external "Forge" modules as much as possible, and use r10k (https://github.com/adrienthebo/r10k) to pull them in from external repos as needed.
+The first time this is run, it will download a base box image which is around 400 MB, so expect this to take a while if you have a slow connection. Once the box is downloaded, a set of scripts will run to bootstrap the VM with needed packages, and then Puppet will run to configure the VM with PHP, MySQL and other fun stuff. This initial setup can take 5-10 minutes or more depending on your hardware and network connection. Subsequent ```vagrant up``` runs will be much faster since everything will already be setup.
 
-site/ and dist/ directories contain locally developed modules. The modules/ directory is automatically populated by r10k and nothing in there should be edited directly.
+When you are done using the machine, use ```vagrant halt``` to shutdown the VM and save battery life and precious CPU cycles that could be better used looking at cat and dog pictures on the Internet.
 
-We push configuration information into Hiera as much as possible so that modules remain clean of specific host/group details.
+## Accessing the CASH Music Dev Instance
+The Puppet provisioning scripts will load in the SQL schema from the Platform repo and load in a default user (dev@cashmusic.org / dev).
 
-## Links 
-[Rackspace Vagrant announcement/instructions](http://developer.rackspace.com/blog/vagrant-now-supports-rackspace-open-cloud.html)  
-[Documentation for the Rackspace Vagrant plugin](https://sourcegraph.com/github.com/mitchellh/vagrant-rackspace)  
-[Rackspace Performance benchmarks / server flavor names](http://developer.rackspace.com/blog/welcome-to-performance-cloud-servers-have-some-benchmarks.html)  
-[Rad SSH keygen guide from Github](https://help.github.com/articles/generating-ssh-keys)
+If you've added an entry to your /etc/hosts file, you should be able to access the site at http://vagrant-mult1.cashmusic.org.  Otherwise, you can use the IP directly (defaults to 10.10.10.20).
+
+The MySQL database is cash_dev, and it can be accessed by the cash_dev_rw user without a password.
+
+You can ssh to the Vagrant VM using ```vagrant ssh```.
