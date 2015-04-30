@@ -1,5 +1,8 @@
-modules
 .vagrant
 Vagrantfile.local
-*.swp
 hiera_private
+# Ignore modules directory as those are all external Puppet modules.
+modules
+# But keep track of placeholder file there so the modules directory always exists.
+!modules/.git_placeholder
+*.swp

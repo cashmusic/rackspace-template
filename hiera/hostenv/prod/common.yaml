@@ -1,3 +1,10 @@
+# Configuration for production servers
+
+#############################################
+# Class definitions.
+classes:
+ - munin
+
 #############################################
 # Deployment Settings.
 site_profile::web::deployment_environment: production

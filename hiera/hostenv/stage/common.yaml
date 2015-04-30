@@ -1,3 +1,10 @@
+# Configuration for staging servers.
+
+#############################################
+# Class definitions.
+classes:
+ - munin
+
 #############################################
 # Deployment Settings.
 site_profile::web::deployment_environment: staging

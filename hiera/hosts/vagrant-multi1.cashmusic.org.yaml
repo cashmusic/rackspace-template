@@ -1,0 +1,22 @@
+# Configuration specific to vagrant-multi1.cashmusic.org
+
+#############################################
+# Class definitions.
+classes:
+  - site_profile::dev_vm
+
+#############################################
+# Apache Settings.
+# Override apache defaults.
+apache::mod::prefork::maxclients: '10'
+apache::mod::prefork::serverlimit: '10'
+apache::mod::prefork::startservers: '5'
+
+#############################################
+# MySQL Settings.
+# MySQL client packages.
+
+# my.cnf overrides.
+site_profile::db::mysql_options:
+  mysqld:
+    innodb_buffer_pool_size: '128M'
