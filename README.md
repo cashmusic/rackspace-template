@@ -7,9 +7,19 @@ For developers, all that's needed to get it working is [Vagrant](http://www.vagr
 1. Install Vagrant, Virtualbox, and optionally the hostsupdater plugin (```vagrant plugin install vagrant-hostsupdater``` after installing Vagrant).
 2. Clone this repo.
 3. Clone the [CASH Music Platform repo](https://github.com/cashmusic/platform).
-4. Copy Vagrantfile.local.example to Vagrantfile.local
-5. Edit Vagrantfile.local to point the dev mount to your local clone of the Platform repo. Optionally configure the VM CPU and memory allocations or VM IP address.
-6. Optionally: edit your /etc/hosts file to add an entry for the virtual machine (or let the Hostsupdater plugin do this for you automatically).
+4. In the Platform codebase, copy ```framework/settings/cashmusic_template.ini.php``` to ```framework/settings/cashmusic.ini.php``` and use the following DB credentials:
+```
+driver = "mysql" ;* sqlite or mysql
+hostname = "localhost"
+username = "cash_dev_rw"
+password = ""
+database = "cash_dev"
+```
+And leave the security salt as the default ```I was born of sun beams; Warming up our limbs```.
+
+5. Copy Vagrantfile.local.example to Vagrantfile.local
+6. Edit Vagrantfile.local to point the dev mount to your local clone of the Platform repo. Optionally configure the VM CPU and memory allocations or VM IP address.
+7. Optionally: edit your /etc/hosts file to add an entry for the virtual machine (or let the Hostsupdater plugin do this for you automatically).
   
 You're good. Now all you need is:
   
