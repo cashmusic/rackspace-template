@@ -4,7 +4,7 @@ class munin::db_monitor (
   $hostname = "localhost",
 ) {
 
-  require mysql::server
+  require site_profile::db
   require munin
 
   # Create a monitoring user for Munin.
