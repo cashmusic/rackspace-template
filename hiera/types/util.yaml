@@ -27,6 +27,9 @@ site_profile::puppetmaster::firewall_rules:
   '110 allow puppet agent from prod-web6':
     port: 8140
     source: prod-web6.cashmusic.org
+  '110 allow puppet agent from prod-web7':
+    port: 8140
+    source: prod-web7.cashmusic.org
   '110 allow puppet agent from dev-multi1':
     port: 8140
     source: dev-multi1.cashmusic.org

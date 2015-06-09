@@ -15,6 +15,9 @@ site_profile::db::firewall_rules:
   '100 allow mysqld from prod-web6':
       port: [3306]
       source: prod-web6
+  '100 allow mysqld from prod-web7':
+      port: [3306]
+      source: prod-web7
 
 ##############################################
 ## MySQL Configuration (overrides values from common.yaml).
