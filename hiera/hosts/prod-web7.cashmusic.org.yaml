@@ -1,0 +1,17 @@
+# Settings specific to host prod-web7.cashmusic.org.
+
+# Override default production environment label for bobo server.
+site_profile::web::deployment_environment: production-bobo
+
+# prod-web7 runs bobo, not the CASH Music platform, so override the default vhost.
+site_profile::web::vhosts:
+  platform_default:
+    default_vhost: false
+  bobo:
+    port: 80
+    default_vhost: true
+    docroot: '/var/www/bobo'
+    docroot_owner: deploy
+    docroot_group: deploy
+    require:
+      - User[deploy]

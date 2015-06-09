@@ -134,7 +134,7 @@ yum_cron::days_of_week: '0'
 
 #############################################
 ## PHP Settings
-# We use IUS PHP 5.3 by default.
+# We use IUS PHP 5.4.
 php::mod_php5:php_package_name: 'php54'
 php::common::common_package_name: 'php54-common'
 php::cli::cli_package_name: 'php54-cli'
