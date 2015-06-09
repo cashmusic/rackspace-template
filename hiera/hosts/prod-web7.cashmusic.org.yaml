@@ -15,3 +15,7 @@ site_profile::web::vhosts:
     docroot_group: deploy
     require:
       - User[deploy]
+
+# This host needs an additional code deploy script for bobo.
+site_profile::web::web_deploy_scripts:
+  - 'bobo_code_deploy.sh'
