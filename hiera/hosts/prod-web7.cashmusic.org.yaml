@@ -19,8 +19,6 @@ site_profile::web::vhosts:
       - '404'
     redirectmatch_regexp:
       - '\.git(/.*|$)/'
-    redirectmatch_dest:
-      - 'http://venues.cashmusic.org'
     require:
       - User[deploy]
 
