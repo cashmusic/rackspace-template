@@ -15,6 +15,12 @@ site_profile::web::vhosts:
       - 'All'
     docroot_owner: deploy
     docroot_group: deploy
+    redirectmatch_status:
+      - '404'
+    redirectmatch_regexp:
+      - '\.git(/.*|$)/'
+    redirectmatch_dest:
+      - 'http://venues.cashmusic.org'
     require:
       - User[deploy]
 
