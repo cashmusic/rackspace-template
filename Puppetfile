@@ -3,7 +3,7 @@ forge 'forge.puppetlabs.com'
 
 # Install modules from the Forge
 mod 'jeffsheltren/yumrepos', '0.3.3'
-mod 'puppetlabs/apache', '1.4.1'
+mod 'puppetlabs/apache', '1.5.0'
 mod 'puppetlabs/concat', '1.2.3'
 mod 'puppetlabs/firewall', '1.0.2'
 mod 'puppetlabs/inifile', '1.0.3'
