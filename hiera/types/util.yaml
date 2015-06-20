@@ -3,11 +3,11 @@
 ##############################################
 ## Class definitions.
 classes:
-  - apache
+  #- apache
   - site_profile::jenkins
-  - site_profile::puppetmaster
+  #- site_profile::puppetmaster
   - munin
-  - munin::server
+  #- munin::server
 
 ##############################################
 ## Firewall configuration.
