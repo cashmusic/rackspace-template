@@ -4,3 +4,25 @@
 # Class definitions.
 classes:
  - munin::db_monitor
+
+#############################################
+# Web configuration.
+# Staging servers also need a vhost for bobo / Venues.
+site_profile::web::vhosts:
+  bobo:
+    port: 80
+    docroot: '/var/www/bobo'
+    override:
+      - 'All'
+    docroot_owner: deploy
+    docroot_group: deploy
+    redirectmatch_status:
+      - '404'
+    redirectmatch_regexp:
+      - '\.git(/.*|$)/'
+    require:
+      - User[deploy]
+
+# This host needs an additional code deploy script for bobo.
+site_profile::web::web_deploy_scripts:
+  - 'bobo_code_deploy.sh'
