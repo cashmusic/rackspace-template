@@ -9,7 +9,7 @@ classes:
 # Web configuration.
 # Staging servers also need a vhost for bobo / Venues.
 site_profile::web::vhosts:
-  bobo:
+  'venues-stage.cashmusic.org':
     port: 80
     docroot: '/var/www/bobo'
     override:
