@@ -41,11 +41,25 @@ class site_profile::web {
   # Install PHP Pear packages.
   php::module { $php_pear_packages: }
 
-  # APC module configuration.
-  php::module::ini { 'apc':
-                     pkgname => hiera('site_profile::web::php_apc_packagename', 'php54-pecl-apc'),
-                     settings => hiera_hash('site_profile::web::php_apc_ini', {}),
-                   }
+  # Install and configure PHP opcache (either APC or Zend Opcache).
+  $opcache_pkg_name = hiera('site_profile::web::php_opcache_packagename', 'php-pecl-apc')
+  php::module { $opcache_pkg_name: }
+  case $opcache_pkg_name {
+    /opcache/: {
+      php::module::ini { 'opcache':
+        pkgname  => $opcache_pkg_name,
+        prefix   => hiera('site_profile::web::php_opcache_prefix', '10'),
+        settings => hiera_hash('site_profile::web::php_opcache_ini', {}),
+        zend     => true,
+      }
+    }
+    default: {
+      php::module::ini { 'apc':
+        pkgname  => $opcache_pkg_name,
+        settings => hiera_hash('site_profile::web::php_apc_ini', {}),
+      }
+    }
+  }
 
   # Setup fastcgi configuration to point to php-fpm.
   class { 'yumrepos::repoforge': }

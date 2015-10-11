@@ -139,6 +139,7 @@ php::mod_php5:php_package_name: 'php54'
 php::common::common_package_name: 'php54-common'
 php::cli::cli_package_name: 'php54-cli'
 php::fpm::daemon::fpm_package_name: 'php54-fpm'
+site_profile::web::php_opcache_packagename: 'php54-pecl-apc'
 
 # We use array merge to pull in a list of PHP modules to install.
 # These are common modules for all web hosts; the list can be appended
@@ -178,6 +179,11 @@ site_profile::web::php_apc_ini:
   apc.shm_size: '64M'
   apc.rfc1867: '1'
   apc.num_files_hint: '1200'
+
+# PHP Opcache Configuration.
+site_profile::web::php_opcache_ini:
+  opcache.enable: 1
+  opcache.memory_consumption: 64
 
 site_profile::web::php_fpm_conf:
   www:
