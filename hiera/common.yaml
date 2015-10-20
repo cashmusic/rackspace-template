@@ -138,7 +138,7 @@ yum_cron::days_of_week: '0'
 php::mod_php5:php_package_name: 'php54'
 php::common::common_package_name: 'php54-common'
 php::cli::cli_package_name: 'php54-cli'
-php::fpm::daemon::fpm_package_name: 'php54-fpm'
+php::fpm::daemon::package_name: 'php54-fpm'
 site_profile::web::php_opcache_packagename: 'php54-pecl-apc'
 
 # We use array merge to pull in a list of PHP modules to install.
@@ -190,7 +190,7 @@ site_profile::web::php_fpm_conf:
     listen: '127.0.0.1:9000'
     user: 'apache'
     group: 'apache'
-    fpm_package_name: 'php54-fpm'
+    package_name: 'php54-fpm'
 
 # Don't use the module's default vhost, we'll create our own.
 apache::default_vhost: false

@@ -20,7 +20,7 @@ php::mod_php5::php_package_name: 'php56u'
 php::common::common_package_name: 'php56u-common'
 php::cli::cli_package_name: 'php56u-cli'
 site_profile::web::php_opcache_packagename: 'php56u-opcache'
-php::fpm::daemon::fpm_package_name: 'php56u-fpm'
+php::fpm::daemon::package_name: 'php56u-fpm'
 site_profile::web::php_packages:
   - php56u-gd
   - php56u-imap
@@ -32,6 +32,11 @@ site_profile::web::php_packages:
   - php56u-soap
   - php56u-xml
   - php56u-xmlrpc
+
+site_profile::web::php_fpm_conf:
+  www:
+    package_name: 'php56u-fpm'
+
 
 ##################################################
 # Munin Configuration.

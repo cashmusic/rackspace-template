@@ -35,8 +35,8 @@ class site_profile::web {
   Class['apache'] -> Class['php::fpm::daemon']
 
   # Install PHP modules (extensions).
-  $php_packages = hiera_array('site_profile::web::php_packages', [])
-  $php_pear_packages = hiera_array('site_profile::web::php_pear_packages', [])
+  $php_packages = hiera('site_profile::web::php_packages', [])
+  $php_pear_packages = hiera('site_profile::web::php_pear_packages', [])
   php::module { $php_packages: }
   # Install PHP Pear packages.
   php::module { $php_pear_packages: }
