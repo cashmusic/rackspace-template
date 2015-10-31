@@ -16,7 +16,7 @@ classes:
 enable_yum_cron: TRUE
 
 ##################################################
-## Firewall Rules.
+# Firewall Rules.
 site_profile::base::firewall_rules:
   '010 allow ssh access':
     port: [22]
@@ -28,12 +28,12 @@ munin::firewall_rules:
     source: prod-util1.cashmusic.org
 
 ##################################################
-## Puppet configuration.
+# Puppet configuration.
 puppet::agent::puppet_server: prod-util1.cashmusic.org
 
 
 ##################################################
-## Puppetmaster configuration.
+# Puppetmaster configuration.
 puppet::master::modulepath: "/etc/puppetmaster/modules:/etc/puppetmaster/site:/etc/puppetmaster/dist"
 puppet::master::manifest: "/etc/puppetmaster/manifests/site.pp"
 puppet::master::hiera_config: "/etc/puppetmaster/hiera.yaml"
@@ -45,7 +45,7 @@ site_profile::puppetmaster::puppet_warning_notification_entries:
 
 
 #############################################
-## User configuration
+# User configuration
 # Passwords must NOT be stored here. They go into the private hiera repo (JSON backend).
 # Generate passwords on CentOS for the password hash with:
 #   echo 'import crypt,getpass; print crypt.crypt(getpass.getpass(), "$6$16_CHARACTER_SALT_HERE")' | python
@@ -84,7 +84,7 @@ system_groups:
     gid: 3650
 
 #############################################
-## Global yum repo configuration.
+# Global yum repo configuration.
 
 # Default to Rackspace EPEL mirror.
 yumrepos::epel::epel_url: http://mirror.rackspace.com/epel/6/x86_64/
@@ -94,7 +94,7 @@ yumrepos::repoforge::repoforge_includepkgs: mod_fastcgi
 
 
 #############################################
-## Global base packages to install everywhere.
+# Global base packages to install everywhere.
 site_profile::base::base_packages:
   - bash-completion
   - cronolog
@@ -112,15 +112,16 @@ site_profile::base::base_packages:
   - yum-plugin-replace
 
 #############################################
-## sshd Configuration.
+# sshd Configuration.
 ssh::server::storeconfigs_enabled: false
 ssh::server::options:
   ClientAliveInterval: '120'
   Subsystem: 'sftp /usr/libexec/openssh/sftp-server'
+  PasswordAuthentication: 'no'
 
 
 #############################################
-## Denyhosts Configuration.
+# Denyhosts Configuration.
 # Global allowed hosts
 denyhosts::allow:
   - 127.0.0.1
@@ -133,29 +134,25 @@ yum_cron::mailto: 'sysops@cashmusic.org'
 yum_cron::days_of_week: '0'
 
 #############################################
-## PHP Settings
-# We use IUS PHP 5.4.
-php::mod_php5:php_package_name: 'php54'
-php::common::common_package_name: 'php54-common'
-php::cli::cli_package_name: 'php54-cli'
-php::fpm::daemon::package_name: 'php54-fpm'
-site_profile::web::php_opcache_packagename: 'php54-pecl-apc'
+# PHP Settings
 
-# We use array merge to pull in a list of PHP modules to install.
-# These are common modules for all web hosts; the list can be appended
-# to for a particular host/role/env by adding additional items to other
-# hierarchy levels in Hiera.
+# Default to PHP 5.6 from IUS
+php::mod_php5::php_package_name: 'php56u'
+php::common::common_package_name: 'php56u-common'
+php::cli::cli_package_name: 'php56u-cli'
+site_profile::web::php_opcache_packagename: 'php56u-opcache'
+php::fpm::daemon::package_name: 'php56u-fpm'
 site_profile::web::php_packages:
-  - php54-gd
-  - php54-imap
-  - php54-mbstring
-  - php54-mcrypt
-  - php54-mysql
-  - php54-pdo
-  - php54-pear
-  - php54-soap
-  - php54-xml
-  - php54-xmlrpc
+  - php56u-gd
+  - php56u-imap
+  - php56u-mbstring
+  - php56u-mcrypt
+  - php56u-mysqlnd
+  - php56u-pdo
+  - php56u-pear
+  - php56u-soap
+  - php56u-xml
+  - php56u-xmlrpc
 
 # php.ini settings
 site_profile::web::php_ini:
@@ -173,25 +170,20 @@ site_profile::web::php_ini:
     allow_url_fopen: 'On'
     date_timezone: 'America/Chicago'
 
-site_profile::web::php_apc_ini:
-  apc.enabled: '1'
-  apc.shm_size: '64M'
-  apc.rfc1867: '1'
-  apc.num_files_hint: '1200'
-
 # PHP Opcache Configuration.
 site_profile::web::php_opcache_ini:
   opcache.enable: 1
   opcache.memory_consumption: 64
 
+# PHP-FPM configuration.
 site_profile::web::php_fpm_conf:
   www:
     listen: '127.0.0.1:9000'
     user: 'apache'
     group: 'apache'
-    package_name: 'php54-fpm'
+    package_name: 'php56u-fpm'
 
-# Don't use the module's default vhost, we'll create our own.
+# Don't use the Apache module's default vhost, we'll create our own.
 apache::default_vhost: false
 
 # Common vhost definitions.
