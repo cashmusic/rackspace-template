@@ -117,6 +117,7 @@ ssh::server::storeconfigs_enabled: false
 ssh::server::options:
   ClientAliveInterval: '120'
   Subsystem: 'sftp /usr/libexec/openssh/sftp-server'
+  PasswordAuthentication: 'no'
 
 
 #############################################
