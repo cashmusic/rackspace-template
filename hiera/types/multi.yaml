@@ -13,32 +13,6 @@ site_profile::web::firewall_rules:
       port: [80, 443]
 
 ##################################################
-# Web Configuration.
-
-# Default to PHP 5.6 from IUS
-php::mod_php5::php_package_name: 'php56u'
-php::common::common_package_name: 'php56u-common'
-php::cli::cli_package_name: 'php56u-cli'
-site_profile::web::php_opcache_packagename: 'php56u-opcache'
-php::fpm::daemon::package_name: 'php56u-fpm'
-site_profile::web::php_packages:
-  - php56u-gd
-  - php56u-imap
-  - php56u-mbstring
-  - php56u-mcrypt
-  - php56u-mysqlnd
-  - php56u-pdo
-  - php56u-pear
-  - php56u-soap
-  - php56u-xml
-  - php56u-xmlrpc
-
-site_profile::web::php_fpm_conf:
-  www:
-    package_name: 'php56u-fpm'
-
-
-##################################################
 # Munin Configuration.
 
 munin::plugins:
