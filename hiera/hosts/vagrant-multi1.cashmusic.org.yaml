@@ -4,6 +4,7 @@
 # Class definitions.
 classes:
   - site_profile::dev_vm
+  - site_profile::vagrant
 
 #############################################
 # Apache Settings.
@@ -20,3 +21,15 @@ apache::mod::prefork::startservers: '5'
 site_profile::db::mysql_options:
   mysqld:
     innodb_buffer_pool_size: '128M'
+
+#############################################
+# Denyhosts Configuration.
+site_profile::base::allowhosts:
+  - 127.0.0.1
+  - 10.0.1.*
+  - 10.0.2.*
+
+#############################################
+# Puppet Configuration.
+puppet::agent::puppet_server: 'localhost'
+puppet::agent::puppet_run_style: 'manual'
