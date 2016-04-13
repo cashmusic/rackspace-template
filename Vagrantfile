@@ -19,8 +19,8 @@ if !defined? $domainname
 end
 
 Vagrant.configure('2') do |config|
-  config.vm.box = "centos6.6-x86_64-50GB-disk-puppet-3.7.3-vbguestaddtions-20141212.box"
-  config.vm.box_url = "http://tag1consulting.com/files/centos6.6-x86_64-50GB-disk-puppet-3.7.3-vbguestaddtions-20141212.box"
+  config.vm.box = "centos67-x86_64-20150830-puppet-3.8.2-vbox-guest-additions-5.0.2.box"
+  config.vm.box_url = "https://pkg.tag1consulting.com/vagrant-boxes/centos6-50GB-vbguest/centos67-x86_64-20150830-puppet-3.8.2-vbox-guest-additions-5.0.2.box"
 
   # Enable ssh agent forwarding
   config.ssh.forward_agent = true
