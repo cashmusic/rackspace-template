@@ -46,3 +46,11 @@ fi
 
 # Run r10k to pull in external modules.
 cd /etc/puppetmaster && r10k -v info puppetfile install
+
+echo ""
+echo "=============================="
+echo "About to start configuration with Puppet,"
+echo "this may take 5-10 minutes or more depending"
+echo "on your system and bandwidth."
+echo "=============================="
+echo ""
