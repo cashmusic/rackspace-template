@@ -4,7 +4,7 @@ This repo contains the Puppet scripts used to configure the CASH Music infrastru
 
 For developers, all that's needed to get it working is [Vagrant](http://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/). You can and should also install the [Vagrant Hostsupdater plugin](https://github.com/cogitatio/vagrant-hostsupdater) if you'd like Vagrant to automatically add an entry to your local hosts file and the [Vagrant vbguest plugin](https://github.com/dotless-de/vagrant-vbguest) to automatically update the VirtualBox Guest Additions within the VM. There are a few configuration steps before getting the machine going:
 
-1. Install Vagrant, Virtualbox, and optionally the hostsupdater plugin (```vagrant plugin install vagrant-hostsupdater``` after installing Vagrant).
+1. Install Vagrant, Virtualbox, and optionally the hostsupdater plugin (```vagrant plugin install vagrant-hostsupdater```) and the vbguest plugin (```vagrant plugin install vagrant-vbguest```) after installing Vagrant.
 2. Clone this repo.
 3. Clone the [CASH Music Platform repo](https://github.com/cashmusic/platform).
 4. In the Platform codebase, copy ```framework/settings/cashmusic_template.ini.php``` to ```framework/settings/cashmusic.ini.php``` and use the following DB credentials:
