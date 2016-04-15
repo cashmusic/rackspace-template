@@ -2,9 +2,9 @@
 
 This repo contains the Puppet scripts used to configure the CASH Music infrastructure and developer VMs.
 
-For developers, all that's needed to get it working is [Vagrant](http://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/). You can also install the [Vagrant Hostsupdater plugin](https://github.com/cogitatio/vagrant-hostsupdater) if you'd like Vagrant to automatically add an entry to your local hosts file. There are a few configuration steps before getting the machine going:
+For developers, all that's needed to get it working is [Vagrant](http://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/). You can and should also install the [Vagrant Hostsupdater plugin](https://github.com/cogitatio/vagrant-hostsupdater) if you'd like Vagrant to automatically add an entry to your local hosts file and the [Vagrant vbguest plugin](https://github.com/dotless-de/vagrant-vbguest) to automatically update the VirtualBox Guest Additions within the VM. There are a few configuration steps before getting the machine going:
 
-1. Install Vagrant, Virtualbox, and optionally the hostsupdater plugin (```vagrant plugin install vagrant-hostsupdater``` after installing Vagrant).
+1. Install Vagrant, Virtualbox, and optionally the hostsupdater plugin (```vagrant plugin install vagrant-hostsupdater```) and the vbguest plugin (```vagrant plugin install vagrant-vbguest```) after installing Vagrant.
 2. Clone this repo.
 3. Clone the [CASH Music Platform repo](https://github.com/cashmusic/platform).
 4. In the Platform codebase, copy ```framework/settings/cashmusic_template.ini.php``` to ```framework/settings/cashmusic.ini.php``` and use the following DB credentials:
@@ -15,7 +15,9 @@ username = "cash_dev_rw"
 password = ""
 database = "cash_dev"
 ```
-And leave the security salt as the default ```I was born of sun beams; Warming up our limbs```.
+Be sure to leave the security salt as the default: ```I was born of sun beams; Warming up our limbs``` so that the imported database works as expected.
+
+Next, configure Vagrant for your environment:
 
 5. Copy Vagrantfile.local.example to Vagrantfile.local
 6. Edit Vagrantfile.local to point the dev mount to your local clone of the Platform repo. Optionally configure the VM CPU and memory allocations or VM IP address.
@@ -34,7 +36,7 @@ When you are done using the machine, use ```vagrant halt``` to shutdown the VM a
 ## Accessing the CASH Music Dev Instance
 The Puppet provisioning scripts will load in the SQL schema from the Platform repo and load in a default user (dev@cashmusic.org / dev).
 
-If you've added an entry to your /etc/hosts file, you should be able to access the site at http://vagrant-mult1.cashmusic.org.  Otherwise, you can use the IP directly (defaults to 10.10.10.20).
+If you've added an entry to your /etc/hosts file (or had it done for you automatically with the HostsUpdater plugin), you should be able to access the site at http://vagrant-mult1.cashmusic.org.  Otherwise, you can use the IP directly (defaults to 10.10.10.20).
 
 The MySQL database is cash_dev, and it can be accessed by the cash_dev_rw user without a password.
 
