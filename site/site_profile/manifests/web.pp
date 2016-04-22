@@ -8,7 +8,12 @@ class site_profile::web {
   class  { 'apache': }
 
   # Create apache vhosts.
-  create_resources('apache::vhost', hiera_hash('site_profile::web::vhosts', {}))
+  $vhosts = hiera_hash('site_profile::web::vhosts', {})
+  create_resources('apache::vhost', $vhosts)
+
+  # Copy out SSL keys/certs if any are defined for a vhost.
+  $vhost_names = keys($vhosts)
+  site_profile::web::ssl_vhost_setup { $vhost_names: vhosts => $vhosts }
 
   # Web-related directories that may not be managed by the apache::vhosts themselves.
   $web_dirs = hiera_hash('site_profile::web::web_dirs', {})
@@ -155,7 +160,11 @@ Host *
 deploy ALL=(root) NOPASSWD: /usr/local/bin/cash_ensure_cachedir.sh",
   }
 
-}
+} # End class site_profile::web.
+
+####################
+# Web-related defined resource types.
+####################
 
 define site_profile::web::deployscript($script = $title) {
   file {"/usr/local/bin/${script}":
@@ -165,5 +174,53 @@ define site_profile::web::deployscript($script = $title) {
                 "puppet:///modules/site_profile/usr/local/bin/${script}",
               ],
     mode => 0755,
+  }
+}
+
+define site_profile::web::ssl_vhost_setup($vhosts) {
+  $vhost_settings = $vhosts[$title]
+  site_profile::web::ssl_cert_copy { $title:
+    ssl_cert => $vhost_settings['ssl_cert'],
+    ssl_key => $vhost_settings['ssl_key'],
+    ssl_ca => $vhost_settings['ssl_ca'],
+  }
+}
+
+define site_profile::web::ssl_cert_copy(
+  $ssl_cert = undef,
+  $ssl_key  = undef,
+  $ssl_ca   = undef,
+) {
+  # Copy out ssl key, cert, ca file for vhosts where defined in a vhost definition.
+  # But only if those files haven't been defined elsewhere in Puppet,
+  # or potentially a shared cert for multiple vhosts.
+  # Look in the private files location first, then look within the calling module.
+  if (!empty($ssl_cert) and !defined(File[$ssl_cert])) {
+    file { $ssl_cert:
+      source => [
+                  "puppet:///infra_private${ssl_cert}",
+                  "puppet:///modules/site_profile${ssl_cert}",
+                ],
+      notify => Service['httpd'],
+    }
+  }
+  if (!empty($ssl_ca) and !defined(File[$ssl_ca])) {
+    file { $ssl_ca:
+      source => [
+                  "puppet:///infra_private${ssl_ca}",
+                  "puppet:///modules/site_profile${ssl_ca}",
+                ],
+      notify => Service['httpd'],
+    }
+  }
+  if (!empty($ssl_key) and !defined(File[$ssl_key])) {
+    file { $ssl_key:
+      source => [
+                  "puppet:///infra_private${ssl_key}",
+                  "puppet:///modules/site_profile${ssl_key}",
+                ],
+      mode   => 0600,
+      notify => Service['httpd'],
+    }
   }
 }

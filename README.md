@@ -21,7 +21,11 @@ Next, configure Vagrant for your environment:
 
 5. Copy Vagrantfile.local.example to Vagrantfile.local
 6. Edit Vagrantfile.local to point the dev mount to your local clone of the Platform repo. Optionally configure the VM CPU and memory allocations or VM IP address.
-7. Optionally: edit your /etc/hosts file to add an entry for the virtual machine (or let the Hostsupdater plugin do this for you automatically).
+7. Edit your /etc/hosts file to add an entry for the virtual machine (or let the Hostsupdater plugin do this for you automatically). The host entry should look like the following, using whichever IP you definied in Vagrantfile.local -- default is 10.10.10.20.
+
+```
+10.10.10.20     vagrant-multi1.cashmusic.org
+```
   
 You're good. Now all you need is:
   
@@ -36,7 +40,7 @@ When you are done using the machine, use ```vagrant halt``` to shutdown the VM a
 ## Accessing the CASH Music Dev Instance
 The Puppet provisioning scripts will load in the SQL schema from the Platform repo and load in a default user (dev@cashmusic.org / dev).
 
-If you've added an entry to your /etc/hosts file (or had it done for you automatically with the HostsUpdater plugin), you should be able to access the site at http://vagrant-multi1.cashmusic.org.  Otherwise, you can use the IP directly (defaults to 10.10.10.20).
+You should now be able to access the site at https://vagrant-multi1.cashmusic.org. Requests to http:// will be automatically redirected to https. The Vagrant site uses a self-signed certificate that you will need to trust in your browser.
 
 The MySQL database is cash_dev, and it can be accessed by the cash_dev_rw user without a password.
 
