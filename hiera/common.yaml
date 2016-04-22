@@ -182,6 +182,13 @@ site_profile::web::php_fpm_conf:
     user: 'apache'
     group: 'apache'
     package_name: 'php56u-fpm'
+    pm: 'dynamic'
+    pm_max_children: '50'
+    pm_start_servers: '10'
+    pm_min_spare_servers: '5'
+    pm_max_spare_servers: '15'
+    pm_max_requests: '1000'
+    catch_workers_output: 'yes'
 
 # Don't use the Apache module's default vhost, we'll create our own.
 apache::default_vhost: false
