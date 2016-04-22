@@ -7,13 +7,21 @@ For developers, all that's needed to get it working is [Vagrant](http://www.vagr
 1. Install Vagrant, Virtualbox, and optionally the hostsupdater plugin (```vagrant plugin install vagrant-hostsupdater```) and the vbguest plugin (```vagrant plugin install vagrant-vbguest```) after installing Vagrant.
 2. Clone this repo.
 3. Clone the [CASH Music Platform repo](https://github.com/cashmusic/platform).
-4. In the Platform codebase, copy ```framework/settings/cashmusic_template.ini.php``` to ```framework/settings/cashmusic.ini.php``` and use the following DB credentials:
-```
+4. In the Platform codebase, copy ```framework/settings/cashmusic_template.ini.php``` to ```framework/settings/cashmusic.ini.php``` and use the following settings in the ```database_connection```, ```security```, and ```api``` sections of the ini file:
+
+ ```
+[database_connection]
 driver = "mysql" ;* sqlite or mysql
 hostname = "localhost"
 username = "cash_dev_rw"
 password = ""
 database = "cash_dev"
+
+[security]
+salt = "I was born of sun beams; Warming up our limbs" ;* DO NOT CHANGE, SRSLY
+
+[api]
+apilocation = "https://vagrant-multi1.cashmusic.org/api/"
 ```
 Be sure to leave the security salt as the default: ```I was born of sun beams; Warming up our limbs``` so that the imported database works as expected.
 
