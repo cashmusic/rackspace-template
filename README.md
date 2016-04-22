@@ -36,7 +36,7 @@ When you are done using the machine, use ```vagrant halt``` to shutdown the VM a
 ## Accessing the CASH Music Dev Instance
 The Puppet provisioning scripts will load in the SQL schema from the Platform repo and load in a default user (dev@cashmusic.org / dev).
 
-If you've added an entry to your /etc/hosts file (or had it done for you automatically with the HostsUpdater plugin), you should be able to access the site at http://vagrant-mult1.cashmusic.org.  Otherwise, you can use the IP directly (defaults to 10.10.10.20).
+If you've added an entry to your /etc/hosts file (or had it done for you automatically with the HostsUpdater plugin), you should be able to access the site at http://vagrant-multi1.cashmusic.org.  Otherwise, you can use the IP directly (defaults to 10.10.10.20).
 
 The MySQL database is cash_dev, and it can be accessed by the cash_dev_rw user without a password.
 
