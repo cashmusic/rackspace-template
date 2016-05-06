@@ -4,16 +4,19 @@
 # Requires /root/.my.cnf be present with mysql login credentials.
 # As such, this script should be run as root.
 #
-# The script takes two arguments:
+# The script takes three arguments:
 #  - backup destination path
 #  - backup retention time in days
-# Ex: mysql-backup.sh /data/backup/mysql 14
+#  - path to .my.cnf with MySQL login credentials
+# Ex: mysql-backup.sh /data/backup/mysql 14 /root/.my.cnf
 # Will store mysqldump files in /data/backup/mysql and remove any .sql.gz files there
 # that are older than 14 days.
 
 backupdir=/data/backup/mysql
 # Retention time in days.
 cleanuptime=14
+# .my.cnf credentials. Defaults to root, can be overridden on command line.
+mycnf=/root/.my.cnf
 
 if [ "$1" == "" ]
 then
@@ -29,6 +32,13 @@ else
   cleanuptime=$2
 fi
 
+if [ "$3" == "" ]
+then
+  echo "No my.cnf file specified, using default /root/.my.cnf"
+else
+  mycnf=$3
+fi
+
 if [ ! -d $backupdir ]
 then
   echo "Backup destination directory does not exist, exiting."
@@ -37,7 +47,6 @@ fi
 
 lockfile=${backupdir}/backup.lockfile
 mypid=$$
-mycnf=/root/.my.cnf
 backupdate=`date +%Y-%m-%d-%H%M`
 
 if [ -e "$lockfile" ]; then
