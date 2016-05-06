@@ -90,4 +90,12 @@ class site_profile::jenkins {
     create_resources('file', $jenkins_work_dirs, {'ensure' => directory,})
   }
 
+  # MySQL backup script.
+  file { "/usr/local/bin/mysql-backup.sh":
+    owner => root,
+    group => root,
+    mode => 755,
+    source => "puppet:///modules/site_profile/usr/local/bin/mysql-backup.sh",
+  }
+
 }
