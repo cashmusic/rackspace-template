@@ -36,3 +36,13 @@ user_accounts:
     uid: 3500
     ssh_key_type: ssh-rsa
     ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQCg5U1E0DPE8UVBYwy703ZUqnNoEFd3TekaoqYzoh1o3FiXjgBzPLl5cccKXdvUbT8ZSUq0ytch0qXbjWArkI3L0uJ961NpOy5aUPkG0WiaQBHMuIXzkaR/geIvVKkN5vcyMi5rEDV+kzx2Uof0yh9XSZ1+bEioxb8+7areP/j+VK23k2QJu67gIwXGuTh5aZ4bjEBou4Zr8Oib5ZqLRY1YUDMoyaZit0lpcIVaVQ826ac+kae4u7ASAN+KHKGrayfHMw1w9xjk71Ollx27O9BROpvIfRt6bNaf/MaKu6Zz9MFMnYxco16JEMr141XGW70utb2i2rReDkVPQit/B/PR
+
+##################################################
+# Sudo Configuration.
+site_profile::web::sudo_conf:
+  deploy_defaults:
+    priority: 15
+    content: 'Defaults:deploy !requiretty'
+  deploy_cachedir:
+    priority: 20
+    content: 'deploy ALL=(root) NOPASSWD: /usr/local/bin/cash_ensure_cachedir.sh'

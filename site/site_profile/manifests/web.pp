@@ -153,6 +153,10 @@ Host *
     site_profile::web::deployscript{$web_deploy_scripts:}
   }
 
+  # Include sudo configuration from hiera.
+  $web_sudo_conf = hiera_hash('site_profile::web::sudo_conf', {})
+  create_resources('sudo::conf', $web_sudo_conf)
+
   # Deploy sudo configuration.
   sudo::conf { 'deploy':
     priority => 15,
