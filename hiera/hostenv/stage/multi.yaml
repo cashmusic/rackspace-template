@@ -22,7 +22,27 @@ site_profile::web::vhosts:
       - '\.git(/.*|$)/'
     require:
       - User[deploy]
+  'watt-stage.cashmusic.org':
+    port: 80
+    docroot: '/var/www/watt'
+    override:
+      - 'All'
+    docroot_owner: deploy
+    docroot_group: deploy
+    redirectmatch_status:
+      - '404'
+    redirectmatch_regexp:
+      - '\.git(/.*|$)/'
+    require:
+      - User[deploy]
 
 # This host needs an additional code deploy script for bobo.
 site_profile::web::web_deploy_scripts:
   - 'bobo_code_deploy.sh'
+  - 'watt_code_deploy.sh'
+  - 'watt_clear_generated_content.sh'
+
+site_profile::web::sudo_conf:
+  deploy_watt_commands:
+    priority: 20
+    content: 'deploy ALL=(root) NOPASSWD: /usr/local/bin/watt_clear_generated_content.sh'
