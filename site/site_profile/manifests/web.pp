@@ -157,13 +157,6 @@ Host *
   $web_sudo_conf = hiera_hash('site_profile::web::sudo_conf', {})
   create_resources('sudo::conf', $web_sudo_conf)
 
-  # Deploy sudo configuration.
-  sudo::conf { 'deploy':
-    priority => 15,
-    content  => "Defaults:deploy !requiretty
-deploy ALL=(root) NOPASSWD: /usr/local/bin/cash_ensure_cachedir.sh",
-  }
-
 } # End class site_profile::web.
 
 ####################
