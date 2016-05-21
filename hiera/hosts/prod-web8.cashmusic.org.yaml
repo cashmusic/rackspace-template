@@ -1,0 +1,33 @@
+# Settings specific to host prod-web8.cashmusic.org.
+
+# Override default production environment label for watt server.
+site_profile::web::deployment_environment: production-watt
+
+# prod-web8 runs Watt, not the CASH Music platform, so override the default vhost.
+site_profile::web::vhosts:
+  platform_default:
+    default_vhost: false
+  watt:
+    port: 80
+    default_vhost: true
+    docroot: '/var/www/watt'
+    override:
+      - 'All'
+    docroot_owner: deploy
+    docroot_group: deploy
+    redirectmatch_status:
+      - '404'
+    redirectmatch_regexp:
+      - '\.git(/.*|$)/'
+    require:
+      - User[deploy]
+
+# This host needs an additional code deploy script for Watt.
+site_profile::web::web_deploy_scripts:
+  - 'watt_code_deploy.sh'
+  - 'watt_clear_generated_content.sh'
+
+site_profile::web::sudo_conf:
+  deploy_watt_commands:
+    priority: 20
+    content: 'deploy ALL=(root) NOPASSWD: /usr/local/bin/watt_clear_generated_content.sh'
