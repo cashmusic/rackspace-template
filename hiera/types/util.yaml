@@ -60,7 +60,9 @@ user_accounts:
       - users
     ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQCnqkM41oV4/mkC56Apr9elNMlKxy3aHi/rP1RCPfhrAE3p0vHqjgrZ6CZ0F/ThRXeb/jCxvmDO7K+u49PvP6O7mD+o94Xza3tET2t8WJC16RlUJSyXVrXugGTKeFYpeBN8Ybe5kLGj34e6ItOQn26S/mKp3q7hqc/VtIz60a5MQeg5QAhD7Eo/Sne1V+Hvb8kkmUg/4GRAodXevY+StJqY1bNaqU+Vpu1JkCVw3YRwoxSzco8FapBrMZkkcZ4cmAutKfvY0N2XR0BJirU04eGRgGFvO6jruxBdBdFNoJF9KTetKyxfn7q4HlDZuZ9lBm1TRBcELbVLEDd/JqRPvk5f
   tomefilepp:
-    uid: 3515
+    ensure: absent
+  tomfilepp:
+    uid: 3516
     # SSH keys for Tom added manually since the account module doesn't support multiple keys.
     groups:
       - users
