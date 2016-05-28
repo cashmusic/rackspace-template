@@ -39,6 +39,7 @@ site_profile::web::vhosts:
 # This host needs an additional code deploy script for bobo.
 site_profile::web::web_deploy_scripts:
   - 'bobo_code_deploy.sh'
+  - 'bobo_code_deploy_with_sql.sh'
   - 'watt_code_deploy.sh'
   - 'watt_clear_generated_content.sh'
 
