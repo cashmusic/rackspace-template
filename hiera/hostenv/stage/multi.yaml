@@ -11,7 +11,7 @@ classes:
 site_profile::web::vhosts:
   'venues-stage.cashmusic.org':
     port: 80
-    docroot: '/var/www/bobo'
+    docroot: '/var/www/bobo/public'
     override:
       - 'All'
     docroot_owner: deploy
