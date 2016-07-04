@@ -59,16 +59,16 @@ user_accounts:
     groups:
       - users
       - db-snapshots
-    ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQCnqkM41oV4/mkC56Apr9elNMlKxy3aHi/rP1RCPfhrAE3p0vHqjgrZ6CZ0F/ThRXeb/jCxvmDO7K+u49PvP6O7mD+o94Xza3tET2t8WJC16RlUJSyXVrXugGTKeFYpeBN8Ybe5kLGj34e6ItOQn26S/mKp3q7hqc/VtIz60a5MQeg5QAhD7Eo/Sne1V+Hvb8kkmUg/4GRAodXevY+StJqY1bNaqU+Vpu1JkCVw3YRwoxSzco8FapBrMZkkcZ4cmAutKfvY0N2XR0BJirU04eGRgGFvO6jruxBdBdFNoJF9KTetKyxfn7q4HlDZuZ9lBm1TRBcELbVLEDd/JqRPvk5f
+    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCnqkM41oV4/mkC56Apr9elNMlKxy3aHi/rP1RCPfhrAE3p0vHqjgrZ6CZ0F/ThRXeb/jCxvmDO7K+u49PvP6O7mD+o94Xza3tET2t8WJC16RlUJSyXVrXugGTKeFYpeBN8Ybe5kLGj34e6ItOQn26S/mKp3q7hqc/VtIz60a5MQeg5QAhD7Eo/Sne1V+Hvb8kkmUg/4GRAodXevY+StJqY1bNaqU+Vpu1JkCVw3YRwoxSzco8FapBrMZkkcZ4cmAutKfvY0N2XR0BJirU04eGRgGFvO6jruxBdBdFNoJF9KTetKyxfn7q4HlDZuZ9lBm1TRBcELbVLEDd/JqRPvk5f'
   tomfilepp:
     uid: 3516
-    # SSH keys for Tom added manually since the account module doesn't support multiple keys.
     groups:
       - users
       - db-snapshots
+    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCkwEGS1wLJU69E0lI+EW+xCl6zSzjFvXVYxIdogxBkH/B2yap0VZkBGfK8xHln4Z3sKoC8F2RFbiBiiDiYGOcshIMH2spFLXvvKfNSAhCUclohSBnVYheJ2HEKI9P2YSmSmDP4zAwEBwGGYCmoUgmZHvENW1WM8fa+Y/dDv+32OaukZW2APZKmt2Em6GmCcA4ZLRN8OZZyv+PrwiPVgbKoDU7rssFqkP8CKPqHByOevfvWfFog/Vv5p+4MEgx3ObrisRIh6xcGQf8TBhyBoMfJ5xs+naKNX0R9HbyGGsDFAOet0SWEoNJ8CIc8DiIm0uAqu+5iXc40PfqjHMzrBrr7'
   waferbaby:
     uid: 3520
     ssh_key_type: ssh-rsa
     groups:
       - users
-    ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQClD1oGLQYJ1bOq1PIys1iRhBIGA0UVLwYxNjhWY+1t0k4FFf0FEpVPW4neLauBsRbHvEsB+v4A7ZrcogMBXznLc8ddBhqO3j0aOn+5T7jJzp+ThPxNIn3jAB8OTMSQBqtPDIfdA7MzBkdeTlWjX2ZvkoTCSprdZVHamfdfKu9ckea10LCXRifaFRb82q8Oh+SXQYUDvsBPwO7n/5+3VrqqLIVBjMfjnFoR72SewEmTQ2qil0aSWBq/tUyDD1AwG535bn1+qBC0VEnny1XsdyordE+0ozFAlkp43f2HHq8nv9kfmwxzzVaAAFquc4id9SgxIXB6yPk64nPfj93Hx501
+    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQClD1oGLQYJ1bOq1PIys1iRhBIGA0UVLwYxNjhWY+1t0k4FFf0FEpVPW4neLauBsRbHvEsB+v4A7ZrcogMBXznLc8ddBhqO3j0aOn+5T7jJzp+ThPxNIn3jAB8OTMSQBqtPDIfdA7MzBkdeTlWjX2ZvkoTCSprdZVHamfdfKu9ckea10LCXRifaFRb82q8Oh+SXQYUDvsBPwO7n/5+3VrqqLIVBjMfjnFoR72SewEmTQ2qil0aSWBq/tUyDD1AwG535bn1+qBC0VEnny1XsdyordE+0ozFAlkp43f2HHq8nv9kfmwxzzVaAAFquc4id9SgxIXB6yPk64nPfj93Hx501'
