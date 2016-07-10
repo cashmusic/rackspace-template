@@ -74,6 +74,10 @@ Vagrant.configure('2') do |config|
     end
   end
 
+  # Configure additional aliases for the hostsupdater plugin.
+  if defined? $host_aliases
+    config.hostsupdater.aliases = $host_aliases
+  end
 
   # Install r10k using the shell provisioner and download the Puppet modules
   config.vm.provision "shell", path: 'bootstrap.sh'
