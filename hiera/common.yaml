@@ -176,6 +176,7 @@ site_profile::web::php_opcache_ini:
   opcache.memory_consumption: 64
 
 # PHP-FPM configuration.
+php::fpm::daemon::log_level: 'warning'
 site_profile::web::php_fpm_conf:
   www:
     listen: '127.0.0.1:9000'
