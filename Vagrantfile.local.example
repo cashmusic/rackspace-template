@@ -17,6 +17,10 @@ $vms = {
   "default" => { "fqdn" => "vagrant-multi1.cashmusic.org", "ipaddress" => "10.10.10.20", "memory" => "1024", "cpus" => "2" },
   }
 
+# Configure additional hostnames to be added to the host machine's /etc/hosts
+# file. Allows access to the VM on e.g. subdomains for multi-user testing.
+# Requires the vagrant-hostsupdater plugin.
+$host_aliases = ["dev.vagrant-multi1.cashmusic.org"]
 
 # Provide list of source mounts. The type defaults to virtualbox, but you could
 # also use nfs (on Mac/Linux) or the rsync type.
