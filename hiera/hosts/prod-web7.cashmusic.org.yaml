@@ -10,7 +10,7 @@ site_profile::web::vhosts:
   bobo:
     port: 80
     default_vhost: true
-    docroot: '/var/www/bobo'
+    docroot: '/var/www/bobo/public'
     override:
       - 'All'
     docroot_owner: deploy
