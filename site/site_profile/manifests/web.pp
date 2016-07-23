@@ -11,6 +11,14 @@ class site_profile::web {
   $vhosts = hiera_hash('site_profile::web::vhosts', {})
   create_resources('apache::vhost', $vhosts)
 
+  # Enable mod_headers.
+  class { 'apache::mod::headers': }
+
+  # Disable Proxy header (https://httpoxy.org/  https://www.apache.org/security/asf-httpoxy-response.txt)
+  apache::custom_config { 'httpoxy.conf':
+    content => 'RequestHeader unset Proxy early'
+  }
+
   # Copy out SSL keys/certs if any are defined for a vhost.
   $vhost_names = keys($vhosts)
   site_profile::web::ssl_vhost_setup { $vhost_names: vhosts => $vhosts }
