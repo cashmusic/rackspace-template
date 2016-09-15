@@ -59,7 +59,7 @@ user_accounts:
     groups:
       - users
       - db-snapshots
-    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCnqkM41oV4/mkC56Apr9elNMlKxy3aHi/rP1RCPfhrAE3p0vHqjgrZ6CZ0F/ThRXeb/jCxvmDO7K+u49PvP6O7mD+o94Xza3tET2t8WJC16RlUJSyXVrXugGTKeFYpeBN8Ybe5kLGj34e6ItOQn26S/mKp3q7hqc/VtIz60a5MQeg5QAhD7Eo/Sne1V+Hvb8kkmUg/4GRAodXevY+StJqY1bNaqU+Vpu1JkCVw3YRwoxSzco8FapBrMZkkcZ4cmAutKfvY0N2XR0BJirU04eGRgGFvO6jruxBdBdFNoJF9KTetKyxfn7q4HlDZuZ9lBm1TRBcELbVLEDd/JqRPvk5f'
+    ssh_key: 'AAAB3NzaC1yc2EAAAADAQABAAABAQC0jcwVt7fCewgrq1pJ3xEnz1gzA7K1xlVTHBezEf4Zv/hEaDFLG9P/qDgL0YJW02fuQDMKnBBM9l95ySjYHX0sh2vfCTIahPvaKOuJXRMG7SsDBLoqCCBnc25AMXYXL/UjFefxaJ4m6nTtzBRVFUTfQtE6vgMaprwNrtnqOiJM4LQUGFpMTtYyH5LsIgN09LRU8NPCZomjpoJ5BSBzrXQxrz2D8IyBzFb6LGK7ILcv4IzrGBNTha+L02SMET3p0EbPO/pK6zIboue7ov8i7m1KZjOurad7s85TFawGwTtFMg6Z1jmxzfypT7FwHQfsdwDtTpS6lRs8rbXrxwHh9uOR'
   tomfilepp:
     uid: 3516
     groups:
