@@ -65,7 +65,7 @@ user_accounts:
     groups:
       - users
       - db-snapshots
-    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCkwEGS1wLJU69E0lI+EW+xCl6zSzjFvXVYxIdogxBkH/B2yap0VZkBGfK8xHln4Z3sKoC8F2RFbiBiiDiYGOcshIMH2spFLXvvKfNSAhCUclohSBnVYheJ2HEKI9P2YSmSmDP4zAwEBwGGYCmoUgmZHvENW1WM8fa+Y/dDv+32OaukZW2APZKmt2Em6GmCcA4ZLRN8OZZyv+PrwiPVgbKoDU7rssFqkP8CKPqHByOevfvWfFog/Vv5p+4MEgx3ObrisRIh6xcGQf8TBhyBoMfJ5xs+naKNX0R9HbyGGsDFAOet0SWEoNJ8CIc8DiIm0uAqu+5iXc40PfqjHMzrBrr7'
+    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC7T6YjPJNoSqju5Ep7qjl3OjPxmhZsUcnqQwuqWurk0NFzEiNs1+oBgBg4GchmpBPFItC/kv48n5IDWgKO/5yZELvDYj728xzROcikOdx/6bbTuW/IpboZ9Agls4CFr6bqwSM6TcNHuYZOi54lFL2EU2Uu+baS9nALm2JWOmsE8P+leczfYXGF4s12vu0hGyRlfdtrQM3xWeG5kiaoyqCVnxNPztn0nmm+pAcSnjTJuKIKfSO6K0YQDZSHj4VRZk2+/pr4bKAyam9fbGGVn5iam2GP8kJkY+79K15rg9a86yJQXCRUTsFEvdFP6MRWlHSS2fh5+KVyBOnckB37u8lz'
   waferbaby:
     uid: 3520
     ssh_key_type: ssh-rsa
