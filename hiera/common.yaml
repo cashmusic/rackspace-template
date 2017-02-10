@@ -89,8 +89,8 @@ system_groups:
 # Default to Rackspace EPEL mirror.
 yumrepos::epel::epel_url: http://mirror.rackspace.com/epel/6/x86_64/
 
-# Use repoforge repo sparingly.
-yumrepos::repoforge::repoforge_includepkgs: mod_fastcgi
+# Exclude http* packages from IUS.
+yumrepos::ius::ius_exclude: 'http*'
 
 
 #############################################

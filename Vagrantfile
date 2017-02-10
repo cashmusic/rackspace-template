@@ -46,17 +46,6 @@ Vagrant.configure('2') do |config|
     end
   end
 
-
-  # Optional share for yum packages so that they don't have be downloaded all the time
-  # when doing a clean build of different VMs.
-  # To turn this on, set vagrant_yum_cache in your Vagrantfile.local,
-  # $vagrant_yum_cache = "/var/cache/vagrantyum_cache"
-  if defined? $vagrant_yum_cache
-    config.vm.synced_folder $vagrant_yum_cache, "/var/cache/yum"
-    config.vm.provision "shell",
-      inline: "echo '--- Turning on yum caching in /etc/yum.conf ---'; perl -pi.bak -e 's/keepcache=0/keepcache=1/' /etc/yum.conf"
-  end
-
   # Mount any development directories
   if defined? $dev_mounts
     # Default mount settings.

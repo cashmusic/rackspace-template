@@ -75,11 +75,23 @@ class site_profile::web {
   }
 
   # Setup fastcgi configuration to point to php-fpm.
-  class { 'yumrepos::repoforge': }
+  # Remove old/broken repoforge repo.
+  yumrepo { 'repoforge':
+    ensure => absent,
+  }
+
+  # Add Tag1 repo for mod_fastcgi.
+  yumrepo { 'tag1-fastcgi':
+    descr    => 'tag1-fastcgi',
+    baseurl  => 'https://pkg.tag1consulting.com/mod_fastcgi/el6/x86_64/',
+    enabled  => '1',
+    gpgcheck => '1',
+    gpgkey   => 'https://pkg.tag1consulting.com/RPM-GPG-KEY-TAG1',
+  }
 
   package { "mod_fastcgi":
     ensure => present,
-    require => Class['yumrepos::repoforge'],
+    require => Yumrepo['tag1-fastcgi'],
   }
 
   # TODO: this should be in a template, configurable with hiera values.
