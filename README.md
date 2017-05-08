@@ -39,4 +39,4 @@ The MySQL database is `cash_dev`, and it can be accessed by the `cash_dev_rw` us
 
 You can ssh to the Vagrant VM using `vagrant ssh`.
 
-**Due to some platform specific issues we're currently using rsync for file synchronization. If rsync doesn't automatically fire on your machine, make sure you run `vagrant rsync-auto` after you `vagrant up`.
+*Due to some platform specific issues we're currently using rsync for file synchronization. If rsync doesn't automatically fire on your machine, make sure you run `vagrant rsync-auto` after you `vagrant up`.
