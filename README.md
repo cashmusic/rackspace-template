@@ -11,16 +11,16 @@ For developers, all that's needed to get it working is [Vagrant](http://www.vagr
 
 Next, configure Vagrant for your environment (only required if your platform repo is in a non-standard location, or if you want to change the IP address or CPU/memory configuration).
 
-5. Copy `Vagrantfile.local.example` to `Vagrantfile.local`
-6. Edit `Vagrantfile.local` to point the dev mount to your local clone of the Platform repo. Optionally configure the VM CPU and memory allocations or VM IP address.
-7. If you haven't installed the vagrant-hostsupdater plugin, you'll need to edit your /etc/hosts file on the host machine to add an entry for the virtual machine do this for you automatically). The host entry should look like the following, using whichever IP you definied in `Vagrantfile.local` -- default is 10.10.10.20.
+1. Copy `Vagrantfile.local.example` to `Vagrantfile.local`
+2. Edit `Vagrantfile.local` to point the dev mount to your local clone of the Platform repo. Optionally configure the VM CPU and memory allocations or VM IP address.
+3. If you haven't installed the vagrant-hostsupdater plugin, you'll need to edit your /etc/hosts file on the host machine to add an entry for the virtual machine do this for you automatically). The host entry should look like the following, using whichever IP you definied in `Vagrantfile.local` -- default is 10.10.10.20.
 
 ```
 10.10.10.20     vagrant-multi1.cashmusic.org
 ```
-  
-You're good. Now all you need is:
-  
+
+You're good. Now all you need is*:
+
 ```
 vagrant up
 ```
@@ -30,10 +30,13 @@ The first time this is run, it will download a base box image which is around 40
 When you are done using the machine, use `vagrant halt` to shutdown the VM and save battery life and precious CPU cycles that could be better used looking at cat and dog pictures on the Internet.
 
 ## Accessing the CASH Music Dev Instance
+
 The Puppet provisioning scripts will load in the SQL schema from the Platform repo and load in a default user (dev@cashmusic.org / dev).
 
-You should now be able to access the site at https://vagrant-multi1.cashmusic.org. Requests to http:// will be automatically redirected to https. The Vagrant site uses a self-signed certificate that you will need to trust in your browser.
+You should now be able to access the site at <https://vagrant-multi1.cashmusic.org>. Requests to http:// will be automatically redirected to https. The Vagrant site uses a self-signed certificate that you will need to trust in your browser.
 
 The MySQL database is `cash_dev`, and it can be accessed by the `cash_dev_rw` user without a password.
 
 You can ssh to the Vagrant VM using `vagrant ssh`.
+
+**Due to some platform specific issues we're currently using rsync for file synchronization. If rsync doesn't automatically fire on your machine, make sure you run `vagrant rsync-auto` after you `vagrant up`.
