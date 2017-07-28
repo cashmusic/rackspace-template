@@ -12,6 +12,10 @@ classes:
  - ntp
 
 #############################################
+# Hacky Pupppet Hacks.
+global::percent_sign: '%'
+
+#############################################
 # Global enable/disable flags.
 enable_yum_cron: TRUE
 
