@@ -219,6 +219,8 @@ site_profile::web::vhosts:
           - Indexes
         order: "allow,deny"
         allow: "from 127.0.0.1"
+    rewrites:
+      - rewrite_rule: '^ - [E=HTTP_AUTHORIZATION:%{hiera("global::percent_sign")}{HTTP:Authorization}]'
     require:
       - User[deploy]
 
