@@ -4,3 +4,7 @@
 # Class definitions.
 classes:
  - munin::db_monitor
+
+# This host needs an additional code deploy script for Tom.
+site_profile::web::web_deploy_scripts:
+  - 'cash_tom_code_deploy.sh'
