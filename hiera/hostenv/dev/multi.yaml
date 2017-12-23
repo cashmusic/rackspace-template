@@ -8,3 +8,17 @@ classes:
 # This host needs an additional code deploy script for Tom.
 site_profile::web::web_deploy_scripts:
   - 'cash_tom_code_deploy.sh'
+
+site_profile::web::cash_api_keys:
+  'dev-api-pub-key':
+    path: '/etc/pki/tls/certs/cash-api-pub-testing.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/certs/cash-api-pub-testing.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'
+  'dev-api-private-key':
+    path: '/etc/pki/tls/private/cash-api-private-testing.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/private/cash-api-private-testing.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'

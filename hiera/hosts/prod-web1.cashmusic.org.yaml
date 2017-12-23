@@ -1,0 +1,13 @@
+site_profile::web::cash_api_keys:
+  'prod-api-pub-key':
+    path: '/etc/pki/tls/certs/cash-api-pub-production.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/certs/cash-api-pub-production.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'
+  'prod-api-private-key':
+    path: '/etc/pki/tls/private/cash-api-private-production.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/private/cash-api-private-production.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'

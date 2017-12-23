@@ -2,3 +2,17 @@
 
 # Override default production environment label for AIR server.
 site_profile::web::deployment_environment: production-air
+
+site_profile::web::cash_api_keys:
+  'air-api-pub-key':
+    path: '/etc/pki/tls/certs/cash-api-pub-air.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/certs/cash-api-pub-air.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'
+  'air-api-private-key':
+    path: '/etc/pki/tls/private/cash-api-private-air.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/private/cash-api-private-air.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'
