@@ -173,6 +173,16 @@ Host *
     site_profile::web::deployscript{$web_deploy_scripts:}
   }
 
+  # API keys.
+  $api_keys = hiera_hash('site_profile::web::cash_api_keys', {})
+  $key_file_defaults = {
+    ensure => present,
+    mode   => 0600,
+    owner  => 'apache',
+    group  => 'apache',
+  }
+  create_resources('file', $api_keys, $key_file_defaults)
+
   # Include sudo configuration from hiera.
   $web_sudo_conf = hiera_hash('site_profile::web::sudo_conf', {})
   create_resources('sudo::conf', $web_sudo_conf)

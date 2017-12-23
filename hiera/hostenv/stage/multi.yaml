@@ -51,3 +51,17 @@ site_profile::web::sudo_conf:
   deploy_watt_commands:
     priority: 20
     content: 'deploy ALL=(root) NOPASSWD: /usr/local/bin/watt_clear_generated_content.sh'
+
+site_profile::web::cash_api_keys:
+  'stage-api-pub-key':
+    path: '/etc/pki/tls/certs/cash-api-pub-staging.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/certs/cash-api-pub-staging.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'
+  'stage-api-private-key':
+    path: '/etc/pki/tls/private/cash-api-private-staging.pem'
+    source: 'puppet:///infra_private/etc/pki/tls/private/cash-api-private-staging.pem'
+    owner: 'apache'
+    group: 'apache'
+    mode: '0600'
