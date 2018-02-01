@@ -62,10 +62,11 @@ user_accounts:
     ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC0jcwVt7fCewgrq1pJ3xEnz1gzA7K1xlVTHBezEf4Zv/hEaDFLG9P/qDgL0YJW02fuQDMKnBBM9l95ySjYHX0sh2vfCTIahPvaKOuJXRMG7SsDBLoqCCBnc25AMXYXL/UjFefxaJ4m6nTtzBRVFUTfQtE6vgMaprwNrtnqOiJM4LQUGFpMTtYyH5LsIgN09LRU8NPCZomjpoJ5BSBzrXQxrz2D8IyBzFb6LGK7ILcv4IzrGBNTha+L02SMET3p0EbPO/pK6zIboue7ov8i7m1KZjOurad7s85TFawGwTtFMg6Z1jmxzfypT7FwHQfsdwDtTpS6lRs8rbXrxwHh9uOR'
   tomfilepp:
     uid: 3516
+    ssh_key_type: ssh-rsa
     groups:
       - users
       - db-snapshots
-    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC7T6YjPJNoSqju5Ep7qjl3OjPxmhZsUcnqQwuqWurk0NFzEiNs1+oBgBg4GchmpBPFItC/kv48n5IDWgKO/5yZELvDYj728xzROcikOdx/6bbTuW/IpboZ9Agls4CFr6bqwSM6TcNHuYZOi54lFL2EU2Uu+baS9nALm2JWOmsE8P+leczfYXGF4s12vu0hGyRlfdtrQM3xWeG5kiaoyqCVnxNPztn0nmm+pAcSnjTJuKIKfSO6K0YQDZSHj4VRZk2+/pr4bKAyam9fbGGVn5iam2GP8kJkY+79K15rg9a86yJQXCRUTsFEvdFP6MRWlHSS2fh5+KVyBOnckB37u8lz'
+    ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQChIA8gOvNo4g2aqyj2tytEhAnIBbbYSTrbCxHPWSda+2vcOWjNUrXKm+pMWQrYgO6fL04K/KnVXffQzOMkO0NweCfo7DvA7ciBtYJtjYWsHrLOGDyT1teZ5GJ4tsDVvJES5BWBCKKx/CpW4bYwlC7LH9FDgJajIHgfdqA71aet/h/+Hrx1vM++VJpn6iPAKBZPyF20wSYH5rkcenS7sD3Cslf9enVaCMFlnShwy8GoXcy7J+VTPz9MjLWSlkckMFm2vYCTofApn8GbzR/BJU6JTaKqHj7JY4ZFMrL6vWF1gqR3zkqQ25Ysvl+EahS+zyBnR5msJn2Uh/ZuKxhAZdTZ'
   waferbaby:
     uid: 3520
     ssh_key_type: ssh-rsa
