@@ -267,7 +267,7 @@ mysql::client::package_manage: FALSE
 site_profile::db::mysql_options:
   mysqld:
     bind_address: 0.0.0.0
-    max_connections: '50'
+    max_connections: '200'
     max_connect_errors: '50000'
     long_query_time: '5'
     slow_query_log: '1'
